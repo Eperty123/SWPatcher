@@ -22,3 +22,11 @@ Go to Menu > Force Patch
 ```
 Force patch
 ```
+### When i try to start the game it says "Soulworker Japan Custom installation not found"
+```
+Go to Settings > Custom client and select the client path, then click on apply
+```
+### I got the error "The path is not of a legal form" after clicking on ready to play or force patch
+```
+Your game path probably contains special characters, rename it and try again
+```
