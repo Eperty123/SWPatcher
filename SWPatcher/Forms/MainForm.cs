@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -65,7 +65,7 @@ namespace SWPatcher.Forms
             {
                 return this._state;
             }
-            private set
+            set
             {
                 if (this._state != value)
                 {
@@ -86,6 +86,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
+
                         case State.Download:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -101,6 +102,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
+
                         case State.Patch:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -116,6 +118,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
+
                         case State.Prepare:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -131,6 +134,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                             break;
+
                         case State.WaitClient:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -146,6 +150,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
+
                         case State.WaitClose:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -162,6 +167,7 @@ namespace SWPatcher.Forms
                             this.WindowState = FormWindowState.Minimized;
 
                             break;
+
                         case State.RTPatch:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ComboBoxRegions.Enabled = false;
@@ -177,6 +183,7 @@ namespace SWPatcher.Forms
                             this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
+
                         case State.RegionNotInstalled:
                             this.ComboBoxLanguages.Enabled = false;
                             this.ButtonDownload.Enabled = false;
@@ -289,6 +296,7 @@ namespace SWPatcher.Forms
                         this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                         break;
+
                     case Patcher.State.Patch:
                         this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_patch")}";
                         this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
@@ -298,11 +306,13 @@ namespace SWPatcher.Forms
                         }
 
                         break;
+
                     case Patcher.State.Save:
                         this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_save")}";
                         this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                         break;
+
                     case Patcher.State.ExePatch:
                         this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_exe")}";
                         this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
@@ -405,46 +415,57 @@ namespace SWPatcher.Forms
                             Logger.Error(ex.Message);
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_not_exist_directory"));
                             break;
+
                         case 7:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_error_open_patch_file"));
                             break;
+
                         case 9:
                             Logger.Error($"error=[{ex.Message}] file=[{Path.Combine(UserSettings.GamePath, ex.FileName)}] version=[{ex.ClientVersion}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_corrupt", $"{Path.Combine(UserSettings.GamePath, ex.FileName)}@Version=[{ex.ClientVersion}]"));
                             break;
+
                         case 15:
                             Logger.Error($"error=[{ex.Message}] file=[{Path.Combine(UserSettings.GamePath, ex.FileName)}] version=[{ex.ClientVersion}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_missing_file", $"{Path.Combine(UserSettings.GamePath, ex.FileName)}@Version=[{ex.ClientVersion}]"));
                             break;
+
                         case 18:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_open_patch_file_fail"));
                             break;
+
                         case 20:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_read_patch_file_fail"));
                             break;
+
                         case 22:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_rename_fail"));
                             break;
+
                         case 29:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_insufficient_storage"));
                             break;
+
                         case 32:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_time_date_fail"));
                             break;
+
                         case 36:
                             Logger.Error($"error=[{ex.Message}] file=[{Path.Combine(UserSettings.GamePath, ex.FileName)}] version=[{ex.ClientVersion}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_corrupt_file", $"{Path.Combine(UserSettings.GamePath, ex.FileName)}@Version=[{ex.ClientVersion}]"));
                             break;
+
                         case 49:
                             Logger.Error($"error=[{ex.Message}]@Version=[{ex.ClientVersion.ToString()}]");
                             MsgBox.Error(StringLoader.GetText("exception_rtpatch_administrator_required"));
                             break;
+
                         default:
 #if !DEBUG
                             string logFileText = File.ReadAllText(ex.LogPath);
@@ -455,7 +476,6 @@ namespace SWPatcher.Forms
                             }
                             catch (PasteBinApiException)
                             {
-
                             }
 
                             Logger.Error($"See {logFileName} for details. Error Code=[{ex.Result}]");
@@ -484,10 +504,12 @@ namespace SWPatcher.Forms
                         this.Downloader.Run(e.Language);
 
                         break;
+
                     case NextState.Play:
                         this.GameStarter.Run(e.Language, true);
 
                         break;
+
                     case NextState.PlayRaw:
                         this.GameStarter.Run(e.Language, false);
 

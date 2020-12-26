@@ -129,32 +129,15 @@ namespace SWPatcher.Forms
                 this.ComboBoxUILanguage.SelectedItem = def;
             }
 
-            if ((this.Owner as MainForm).CurrentState == MainForm.State.Idle)
-            {
-                this.TextBoxPatcherDirectory.TextChanged += this.EnableApplyButton;
-                this.CheckBoxPatchExe.CheckedChanged += this.EnableApplyButton;
-                this.TextBoxId.TextChanged += this.EnableApplyButton;
-                this.TextBoxPassword.TextChanged += this.EnableApplyButton;
-                this.CheckBoxWantToLogin.CheckedChanged += this.EnableApplyButton;
-                this.ComboBoxUILanguage.SelectedIndexChanged += this.EnableApplyButton;
-                this.CustomGamePathTextBox.TextChanged += this.EnableApplyButton;
-                this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
-                this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
-            }
-            else if ((this.Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)
-            {
-                this.ButtonOpenGameDirectory.Enabled = false;
-                this.ButtonOpenGameOptions.Enabled = false;
-            }
-            else
-            {
-                this.ButtonChangePatcherDirectory.Enabled = false;
-                this.CheckBoxPatchExe.Enabled = false;
-                this.TextBoxId.ReadOnly = true;
-                this.TextBoxPassword.ReadOnly = true;
-                this.CheckBoxWantToLogin.Enabled = false;
-                this.ComboBoxUILanguage.Enabled = false;
-            }
+            this.TextBoxPatcherDirectory.TextChanged += this.EnableApplyButton;
+            this.CheckBoxPatchExe.CheckedChanged += this.EnableApplyButton;
+            this.TextBoxId.TextChanged += this.EnableApplyButton;
+            this.TextBoxPassword.TextChanged += this.EnableApplyButton;
+            this.CheckBoxWantToLogin.CheckedChanged += this.EnableApplyButton;
+            this.ComboBoxUILanguage.SelectedIndexChanged += this.EnableApplyButton;
+            this.CustomGamePathTextBox.TextChanged += this.EnableApplyButton;
+            this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
+            this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
         }
 
         private void EnableApplyButton(object sender, EventArgs e)
@@ -299,6 +282,10 @@ namespace SWPatcher.Forms
                 if (UserSettings.CustomGamePath != this.CustomGamePath)
                 {
                     UserSettings.CustomGamePath = this.CustomGamePath;
+                    if ((this.Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)
+                    {
+                        (this.Owner as MainForm).CurrentState = MainForm.State.Idle;
+                    }
                 }
 
                 if (UserSettings.CustomGameIp != this.ServerIp)
@@ -422,6 +409,7 @@ namespace SWPatcher.Forms
                 //UserSettings.CustomGamePath = fbd.SelectedPath;
                 CustomGamePathTextBox.Text = fbd.SelectedPath;
                 this.CustomGamePath = fbd.SelectedPath;
+                if (!ButtonApply.Enabled) ButtonApply.Enabled = true;
             }
         }
 

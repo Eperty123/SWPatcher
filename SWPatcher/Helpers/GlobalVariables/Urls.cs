@@ -23,10 +23,11 @@ namespace SWPatcher.Helpers.GlobalVariables
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
 #if DEBUG
 
-        internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
+        //internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
+                internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
 
 #else
-        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/Translations";
+        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
 #endif
         internal const string OriginalTranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
         internal const string SoulworkerSettingsHome = "http://patch-cdn.soulworker.gamecom.jp/SWK/update/";
