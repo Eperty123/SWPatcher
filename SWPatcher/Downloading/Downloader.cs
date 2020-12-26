@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -27,8 +27,9 @@ using System.Threading;
 
 namespace SWPatcher.Downloading
 {
-    delegate void DownloaderProgressChangedEventHandler(object sender, DownloaderProgressChangedEventArgs e);
-    delegate void DownloaderCompletedEventHandler(object sender, DownloaderCompletedEventArgs e);
+    internal delegate void DownloaderProgressChangedEventHandler(object sender, DownloaderProgressChangedEventArgs e);
+
+    internal delegate void DownloaderCompletedEventHandler(object sender, DownloaderCompletedEventArgs e);
 
     internal class Downloader
     {
@@ -50,6 +51,7 @@ namespace SWPatcher.Downloading
         }
 
         internal event DownloaderProgressChangedEventHandler DownloaderProgressChanged;
+
         internal event DownloaderCompletedEventHandler DownloaderCompleted;
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -119,8 +121,8 @@ namespace SWPatcher.Downloading
 
         private void DownloadNext(int index)
         {
-            Uri uri = new Uri(Urls.TranslationGitHubHome + this.Language.Path + '/' + SWFileManager.GetElementAt(index).PathD);
-
+            string pathname = Language.Path.StartsWith("jpc") ? "jp" + Language.Path.Substring(3) : Language.Path;
+            Uri uri = new Uri(Urls.OriginalTranslationGitHubHome + pathname + '/' + SWFileManager.GetElementAt(index).PathD);
             this.Client.DownloadDataAsync(uri, index);
 
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), uri.AbsoluteUri));

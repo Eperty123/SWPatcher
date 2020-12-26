@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -22,10 +22,13 @@ namespace SWPatcher.Helpers.GlobalVariables
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
 #if DEBUG
-        internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\GitHub\SoulWorkerHQTranslations\");
+
+        internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
+
 #else
-        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
+        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/Translations";
 #endif
+        internal const string OriginalTranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
         internal const string SoulworkerSettingsHome = "http://patch-cdn.soulworker.gamecom.jp/SWK/update/";
         internal const string SoulworkerJPHangeHome = "http://soulworker.hange.jp/";
         internal const string SoulworkerJPGamecomHome = "http://soulworker.gamecom.jp/";

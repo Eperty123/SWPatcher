@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -34,10 +34,13 @@ using System.Threading;
 
 namespace SWPatcher.RTPatch
 {
-    delegate void RTPatcherDownloadProgressChangedEventHandler(object sender, RTPatcherDownloadProgressChangedEventArgs e);
-    delegate void RTPatcherProgressChangedEventHandler(object sender, RTPatcherProgressChangedEventArgs e);
-    delegate void RTPatcherCompletedEventHandler(object sender, RTPatcherCompletedEventArgs e);
-    delegate string RTPatchCallback(uint id, IntPtr ptr);
+    internal delegate void RTPatcherDownloadProgressChangedEventHandler(object sender, RTPatcherDownloadProgressChangedEventArgs e);
+
+    internal delegate void RTPatcherProgressChangedEventHandler(object sender, RTPatcherProgressChangedEventArgs e);
+
+    internal delegate void RTPatcherCompletedEventHandler(object sender, RTPatcherCompletedEventArgs e);
+
+    internal delegate string RTPatchCallback(uint id, IntPtr ptr);
 
     internal class RTPatcher
     {
@@ -55,7 +58,9 @@ namespace SWPatcher.RTPatch
         private Language Language;
 
         internal event RTPatcherDownloadProgressChangedEventHandler RTPatcherDownloadProgressChanged;
+
         internal event RTPatcherProgressChangedEventHandler RTPatcherProgressChanged;
+
         internal event RTPatcherCompletedEventHandler RTPatcherCompleted;
 
         internal RTPatcher()
@@ -82,6 +87,7 @@ namespace SWPatcher.RTPatch
                     Logger.Debug(Methods.MethodFullName("RTPatch", Thread.CurrentThread.ManagedThreadId.ToString(), this.ClientNextVersion.ToString()));
 
                     break;
+
                 case "kr":
                     CheckKRVersion();
                     //Logger.Debug(Methods.MethodFullName("RTPatch", Thread.CurrentThread.ManagedThreadId.ToString()));
@@ -92,10 +98,14 @@ namespace SWPatcher.RTPatch
                     CheckNaverKRVersion();
 
                     return;
+
                 case "gf":
                     CheckGFVersion();
-
                     return;
+
+                case "jpc":
+                    return;
+
                 default:
                     throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
             }
@@ -124,7 +134,9 @@ namespace SWPatcher.RTPatch
                 Directory.CreateDirectory(logDirectory);
 
                 Logger.Info($"Downloading url=[{url}] path=[{destination}]");
+
                 #region Download Resumable File
+
                 using (FileStream fs = File.OpenWrite(destination))
                 {
                     long fileLength = fs.Length < DiffBytes ? 0 : fs.Length - DiffBytes;
@@ -181,12 +193,15 @@ namespace SWPatcher.RTPatch
                         }
                     }
                 }
-                #endregion
+
+                #endregion Download Resumable File
 
                 Methods.CheckRunningProcesses(regionId);
                 Logger.Info($"RTPatchApply diffFile=[{diffFilePath}] path=[{gamePath}]");
                 this.Worker.ReportProgress(-1, 0L);
+
                 #region Apply RTPatch
+
                 File.Delete(this.CurrentLogFilePath);
                 string command = $"/u /nos \"{gamePath}\" \"{diffFilePath}\"";
                 ulong result = Environment.Is64BitProcess ? NativeMethods.RTPatchApply64(command, new RTPatchCallback(this.RTPatchMessage), true) : NativeMethods.RTPatchApply32(command, new RTPatchCallback(this.RTPatchMessage), true);
@@ -221,7 +236,8 @@ namespace SWPatcher.RTPatch
                     ini.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value = clientVer;
                     ini.Save(iniPath);
                 }
-                #endregion
+
+                #endregion Apply RTPatch
             }
         }
 
@@ -490,6 +506,7 @@ namespace SWPatcher.RTPatch
                     File.AppendAllText(this.CurrentLogFilePath, text);
 
                     break;
+
                 case 14u:
                 case 17u:
                 case 18u: // abort on error
@@ -503,12 +520,14 @@ namespace SWPatcher.RTPatch
                     File.AppendAllText(this.CurrentLogFilePath, $"[{percentage}%]");
 
                     break;
+
                 case 6u: // number of files in patch
                     int fileCount = Marshal.ReadInt32(ptr);
                     this.FileCount = fileCount;
                     File.AppendAllText(this.CurrentLogFilePath, $"File Count=[{fileCount}]\n");
 
                     break;
+
                 case 7u: // current file
                     string fileName = Marshal.PtrToStringAnsi(ptr);
                     this.FileNumber++;
@@ -517,6 +536,7 @@ namespace SWPatcher.RTPatch
                     File.AppendAllText(this.CurrentLogFilePath, $"Patching=[{fileName}]\n");
 
                     break;
+
                 default:
                     break; // ignore rest
             }

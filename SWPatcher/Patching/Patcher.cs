@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -33,8 +33,9 @@ using System.Threading;
 
 namespace SWPatcher.Patching
 {
-    delegate void PatcherProgressChangedEventHandler(object sender, PatcherProgressChangedEventArgs e);
-    delegate void PatcherCompletedEventHandler(object sender, PatcherCompletedEventArgs e);
+    internal delegate void PatcherProgressChangedEventHandler(object sender, PatcherProgressChangedEventArgs e);
+
+    internal delegate void PatcherCompletedEventHandler(object sender, PatcherCompletedEventArgs e);
 
     internal class Patcher
     {
@@ -51,6 +52,7 @@ namespace SWPatcher.Patching
         private readonly BackgroundWorker Worker;
         private Language Language;
         private const byte SecretByte = 0x55;
+
         internal State CurrentState
         {
             get
@@ -82,6 +84,7 @@ namespace SWPatcher.Patching
         }
 
         internal event PatcherProgressChangedEventHandler PatcherProgressChanged;
+
         internal event PatcherCompletedEventHandler PatcherCompleted;
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -134,6 +137,7 @@ namespace SWPatcher.Patching
                     string[] formatArray = fullFormatArray.Skip(2).ToArray(); // skip idIndex and countFormat
 
                     #region Patching the File
+
                     ulong dataCount = 0;
                     ulong dataSum = 0;
                     ushort hashLength = 32;
@@ -160,14 +164,17 @@ namespace SWPatcher.Patching
                                 dataCount = br.ReadByte();
                                 bw.Write(Convert.ToByte(dataCount));
                                 break;
+
                             case "2":
                                 dataCount = br.ReadUInt16();
                                 bw.Write(Convert.ToUInt16(dataCount));
                                 break;
+
                             case "4":
                                 dataCount = br.ReadUInt32();
                                 bw.Write(Convert.ToUInt32(dataCount));
                                 break;
+
                             case "8":
                                 dataCount = br.ReadUInt64();
                                 bw.Write(Convert.ToUInt64(dataCount));
@@ -184,6 +191,7 @@ namespace SWPatcher.Patching
                             }
 
                             #region Object Reading
+
                             object[] current = new object[formatArray.Length];
                             for (int j = 0; j < formatArray.Length; j++)
                             {
@@ -198,15 +206,19 @@ namespace SWPatcher.Patching
                                     case "1":
                                         current[j] = Convert.ToByte(br.ReadByte());
                                         break;
+
                                     case "2":
                                         current[j] = Convert.ToUInt16(br.ReadUInt16());
                                         break;
+
                                     case "4":
                                         current[j] = Convert.ToUInt32(br.ReadUInt32());
                                         break;
+
                                     case "8":
                                         current[j] = Convert.ToUInt64(br.ReadUInt64());
                                         break;
+
                                     case "len":
                                         switch (formatArray[++j])
                                         {
@@ -214,14 +226,17 @@ namespace SWPatcher.Patching
                                                 value = br.ReadByte();
                                                 current[j] = Convert.ToByte(br.ReadByte());
                                                 break;
+
                                             case "2":
                                                 value = br.ReadUInt16();
                                                 current[j] = Convert.ToUInt16(value);
                                                 break;
+
                                             case "4":
                                                 value = br.ReadUInt32();
                                                 current[j] = Convert.ToUInt32(value);
                                                 break;
+
                                             case "8":
                                                 value = br.ReadUInt64();
                                                 current[j] = Convert.ToUInt64(value);
@@ -236,9 +251,11 @@ namespace SWPatcher.Patching
                                         break;
                                 }
                             }
-                            #endregion
+
+                            #endregion Object Reading
 
                             #region Object Writing
+
                             int lenPosition = 0;
                             for (int j = 0; j < formatArray.Length; j++)
                             {
@@ -254,18 +271,22 @@ namespace SWPatcher.Patching
                                         value = Convert.ToByte(current[j]);
                                         bw.Write(Convert.ToByte(value));
                                         break;
+
                                     case "2":
                                         value = Convert.ToUInt16(current[j]);
                                         bw.Write(Convert.ToUInt16(value));
                                         break;
+
                                     case "4":
                                         value = Convert.ToUInt32(current[j]);
                                         bw.Write(Convert.ToUInt32(value));
                                         break;
+
                                     case "8":
                                         value = Convert.ToUInt64(current[j]);
                                         bw.Write(Convert.ToUInt64(value));
                                         break;
+
                                     case "len":
                                         byte[] strBytes = null;
                                         j++;
@@ -281,12 +302,15 @@ namespace SWPatcher.Patching
                                             case "1":
                                                 bw.Write(Convert.ToByte(value));
                                                 break;
+
                                             case "2":
                                                 bw.Write(Convert.ToUInt16(value));
                                                 break;
+
                                             case "4":
                                                 bw.Write(Convert.ToUInt32(value));
                                                 break;
+
                                             case "8":
                                                 bw.Write(Convert.ToUInt64(value));
                                                 break;
@@ -302,7 +326,8 @@ namespace SWPatcher.Patching
 
                                 dataSum += value;
                             }
-                            #endregion
+
+                            #endregion Object Writing
                         }
 
                         bw.Write(hashLength);
@@ -314,7 +339,8 @@ namespace SWPatcher.Patching
 
                         bw.Write(hash);
                     }
-                    #endregion
+
+                    #endregion Patching the File
 
                     Methods.ZipFileStream(archives[patchedSWFile.Path], patchedSWFile.PathA, msDest, archivePassword);
                 }
@@ -349,10 +375,18 @@ namespace SWPatcher.Patching
 
                 Directory.CreateDirectory(archivePathDirectory);
 
-                using (var xfs = new XorFileStream(archivePath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, SecretByte))
+                using (var fs = new MemoryStream())
                 {
-                    zipFile.Save(xfs);
+                    zipFile.Save(fs);
+                    byte[] buffer = fs.ToArray();
                     zipFile.Dispose(); // TODO: using () { }
+
+                    for (int i = 0; i < buffer.Length; i++)
+                    {
+                        buffer[i] ^= SecretByte;
+                    }
+
+                    File.WriteAllBytes(archivePath, buffer);
                 }
             }
 
@@ -420,7 +454,6 @@ namespace SWPatcher.Patching
 
             return result;
         }
-
 
         private static string GetMD5(string text)
         {

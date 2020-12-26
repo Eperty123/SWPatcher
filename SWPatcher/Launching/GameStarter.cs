@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -36,8 +36,9 @@ using static SWPatcher.Forms.MainForm;
 
 namespace SWPatcher.Launching
 {
-    delegate void GameStarterProgressChangedEventHandler(object sender, GameStarterProgressChangedEventArgs e);
-    delegate void GameStarterCompletedEventHandler(object sender, GameStarterCompletedEventArgs e);
+    internal delegate void GameStarterProgressChangedEventHandler(object sender, GameStarterProgressChangedEventArgs e);
+
+    internal delegate void GameStarterCompletedEventHandler(object sender, GameStarterCompletedEventArgs e);
 
     internal class GameStarter
     {
@@ -58,6 +59,7 @@ namespace SWPatcher.Launching
         }
 
         internal event GameStarterProgressChangedEventHandler GameStarterProgressChanged;
+
         internal event GameStarterCompletedEventHandler GameStarterCompleted;
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -125,6 +127,7 @@ namespace SWPatcher.Launching
                             }
 
                             break;
+
                         case "gjp":
                             StartGamecomJP(() => BackupAndPlaceFiles(this.Language));
 
@@ -150,6 +153,7 @@ namespace SWPatcher.Launching
                             }
 
                             break;
+
                         case "kr":
                             StartStoveKR(() => BackupAndPlaceFiles(this.Language));
 
@@ -175,14 +179,18 @@ namespace SWPatcher.Launching
                             }
 
                             break;
+
                         case "nkr":
                             Methods.RegionDoesNotSupportLogin();
 
                             break;
+
+                        case "jpc":
                         case "gf":
                             Methods.RegionDoesNotSupportLogin();
 
                             break;
+
                         default:
                             throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
                     }
@@ -230,24 +238,30 @@ namespace SWPatcher.Launching
                             e.Cancel = true;
 
                             break;
+
                         case "gjp":
                             StartGamecomJP();
                             e.Cancel = true;
 
                             break;
+
                         case "kr":
                             StartStoveKR();
                             e.Cancel = true;
 
                             break;
+
                         case "nkr":
                             Methods.RegionDoesNotSupportLogin();
 
                             break;
+
+                        case "jpc":
                         case "gf":
                             Methods.RegionDoesNotSupportLogin();
 
                             break;
+
                         default:
                             throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
                     }
@@ -372,7 +386,6 @@ namespace SWPatcher.Launching
             }
             catch (IndexOutOfRangeException)
             {
-
             }
 
             return client;
@@ -443,6 +456,7 @@ namespace SWPatcher.Launching
                 case "000":
 
                     break;
+
                 case "589":
                     Process.Start("https://member.onstove.com/auth/login");
                     throw new Exception(StringLoader.GetText("exception_captcha_required"));
@@ -474,11 +488,13 @@ namespace SWPatcher.Launching
                             StoveLogin(client);
 
                             break;
+
                         default:
                             throw new Exception($"result=[{jsonResponse.result}]\n{jsonResponse.message ?? "no error details"}");
                     }
 
                     break;
+
                 default:
                     throw new Exception($"result=[{jsonResponse.result}]\n{jsonResponse.message ?? "no error details"}");
             }

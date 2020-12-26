@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -70,35 +70,29 @@ namespace SWPatcher.Patching
         [Obsolete("This constructor has been deprecated. Please use new XorFileStream(SafeFileHandle handle, FileAccess access, byte xorByte) instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
         internal XorFileStream(IntPtr handle, FileAccess access, byte xorByte) : this(handle, access, true, 4096, false, xorByte)
         {
-
         }
 
         [Obsolete("This constructor has been deprecated. Please use new XorFileStream(SafeFileHandle handle, FileAccess access, byte xorByte) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  http://go.microsoft.com/fwlink/?linkid=14202")]
         internal XorFileStream(IntPtr handle, FileAccess access, bool ownsHandle, byte xorByte) : this(handle, access, ownsHandle, 4096, false, xorByte)
         {
-
         }
 
         [Obsolete("This constructor has been deprecated. Please use new XorFileStream(SafeFileHandle handle, FileAccess access, int bufferSize, byte xorByte) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  http://go.microsoft.com/fwlink/?linkid=14202")]
         internal XorFileStream(IntPtr handle, FileAccess access, bool ownsHandle, int bufferSize, byte xorByte) : this(handle, access, ownsHandle, bufferSize, false, xorByte)
         {
-
         }
 
         [Obsolete("This constructor has been deprecated. Please use new XorFileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync, byte xorByte) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  http://go.microsoft.com/fwlink/?linkid=14202")]
         internal XorFileStream(IntPtr handle, FileAccess access, bool ownsHandle, int bufferSize, bool isAsync, byte xorByte) : this(new SafeFileHandle(handle, ownsHandle), access, bufferSize, isAsync, xorByte)
         {
-
         }
 
         internal XorFileStream(SafeFileHandle handle, FileAccess access, byte xorByte) : this(handle, access, 4096, false, xorByte)
         {
-
         }
 
         internal XorFileStream(SafeFileHandle handle, FileAccess access, int bufferSize, byte xorByte) : this(handle, access, bufferSize, false, xorByte)
         {
-
         }
 
         internal XorFileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync, byte xorByte) : base(handle, access, bufferSize, isAsync)

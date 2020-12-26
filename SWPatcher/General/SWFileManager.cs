@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -32,12 +32,15 @@ namespace SWPatcher.General
     {
         private static List<SWFile> SWFiles;
         internal static int Count => SWFiles.Count;
+
         internal static SWFile GetElementAt(int index) => SWFiles[index];
+
         internal static ReadOnlyCollection<SWFile> GetFiles() => SWFiles.AsReadOnly();
 
         internal static void LoadFileConfiguration(Language language)
         {
-            string packPath = Urls.TranslationGitHubHome + language.Path + '/' + Strings.IniName.TranslationPackData;
+            string pathname = language.Path == "jpc" ? "jp" : language.Path;
+            string packPath = Urls.TranslationGitHubHome + pathname + '/' + Strings.IniName.TranslationPackData;
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), packPath));
             InternalLoadFileConfiguration(packPath);
         }

@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -239,6 +239,7 @@ namespace SWPatcher.Helpers
                 {
                     case "0":
                         return jsonResponse.value.live_version;
+
                     default:
                         throw new Exception($"result=[{jsonResponse.result}]\n{jsonResponse.message ?? "no error details"}");
                 }
@@ -692,18 +693,23 @@ namespace SWPatcher.Helpers
                 return Convert.ToString(key.GetValue(varName, defaultValue));
             }
         }
+
         internal static string GetGameExeName(string regionId)
         {
             switch (regionId)
             {
                 case "jp":
                 case "gjp":
+                case "jpc":
                     return Strings.FileName.GameExeJP;
+
                 case "kr":
                 case "nkr":
                     return Strings.FileName.GameExeKR;
+
                 case "gf":
                     return Strings.FileName.GameExeGF;
+
                 default:
                     throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
             }

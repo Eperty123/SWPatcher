@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -53,16 +53,19 @@ namespace SWPatcher.Forms
                     this.RTPatcher.Run(this.ComboBoxLanguages.SelectedItem as Language);
 
                     break;
+
                 case State.Download:
                     this.ButtonDownload.Text = StringLoader.GetText("button_cancelling");
                     this.Downloader.Cancel();
 
                     break;
+
                 case State.Patch:
                     this.ButtonDownload.Text = StringLoader.GetText("button_cancelling");
                     this.Patcher.Cancel();
 
                     break;
+
                 case State.RTPatch:
                     this.ButtonDownload.Text = StringLoader.GetText("button_cancelling");
                     this.RTPatcher.Cancel();
@@ -81,6 +84,7 @@ namespace SWPatcher.Forms
                     this.RTPatcher.Run(this.ComboBoxLanguages.SelectedItem as Language);
 
                     break;
+
                 case State.WaitClient:
                     this.ButtonPlay.Text = StringLoader.GetText("button_cancelling");
                     this.GameStarter.Cancel();
@@ -165,22 +169,30 @@ namespace SWPatcher.Forms
                         newGamePath = GetJPSwPathFromRegistry();
 
                         break;
+
                     case "gjp":
                         newGamePath = GetJPSwPathFromRegistry();
 
                         break;
+
                     case "kr":
                         newGamePath = GetKRSwPathFromRegistry();
 
                         break;
+
                     case "nkr":
                         newGamePath = GetNaverKRSwPathFromRegistry();
 
                         break;
+
                     case "gf":
                         newGamePath = GetGameforgeSwPath();
-
                         break;
+
+                    case "jpc":
+                        newGamePath = GetCustomGamePath();
+                        break;
+
                     default:
                         throw new Exception(StringLoader.GetText("exception_region_unknown", region.Id));
                 }
@@ -250,22 +262,27 @@ namespace SWPatcher.Forms
                     Process.Start(Urls.SoulworkerJPHangeHome);
 
                     break;
+
                 case "gjp":
                     Process.Start(Urls.SoulworkerJPGamecomHome);
 
                     break;
+
                 case "kr":
                     Process.Start(Urls.SoulworkerKRHome);
 
                     break;
+
                 case "nkr":
                     Process.Start(Urls.SoulworkerNaverKRHome);
 
                     break;
+
                 case "gf":
                     Process.Start(Urls.SoulworkerGFHome);
 
                     break;
+
                 default:
                     throw new Exception(StringLoader.GetText("exception_region_unknown", region.Id));
             }

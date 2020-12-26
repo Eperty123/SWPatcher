@@ -72,6 +72,14 @@ namespace SWPatcher.Forms
             this.GroupBoxPatcherDirectory = new System.Windows.Forms.GroupBox();
             this.ButtonChangePatcherDirectory = new System.Windows.Forms.Button();
             this.TextBoxPatcherDirectory = new System.Windows.Forms.TextBox();
+            this.TabCustomClient = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ServerPortTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ServerIpTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.CustomGamePathButton = new System.Windows.Forms.Button();
+            this.CustomGamePathTextBox = new System.Windows.Forms.TextBox();
             this.TableLayoutPanel.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.TabPageGame.SuspendLayout();
@@ -85,6 +93,10 @@ namespace SWPatcher.Forms
             this.TabPagePatcher.SuspendLayout();
             this.GroupBoxUILanguagePicker.SuspendLayout();
             this.GroupBoxPatcherDirectory.SuspendLayout();
+            this.TabCustomClient.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // TableLayoutPanel
@@ -104,13 +116,13 @@ namespace SWPatcher.Forms
             this.TableLayoutPanel.RowCount = 2;
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.TableLayoutPanel.Size = new System.Drawing.Size(320, 252);
+            this.TableLayoutPanel.Size = new System.Drawing.Size(320, 246);
             this.TableLayoutPanel.TabIndex = 0;
             // 
             // ButtonApply
             // 
             this.ButtonApply.Enabled = false;
-            this.ButtonApply.Location = new System.Drawing.Point(242, 224);
+            this.ButtonApply.Location = new System.Drawing.Point(242, 218);
             this.ButtonApply.Name = "ButtonApply";
             this.ButtonApply.Size = new System.Drawing.Size(75, 23);
             this.ButtonApply.TabIndex = 3;
@@ -119,7 +131,7 @@ namespace SWPatcher.Forms
             // 
             // ButtonCancel
             // 
-            this.ButtonCancel.Location = new System.Drawing.Point(161, 224);
+            this.ButtonCancel.Location = new System.Drawing.Point(161, 218);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.ButtonCancel.TabIndex = 2;
@@ -128,7 +140,7 @@ namespace SWPatcher.Forms
             // 
             // ButtonOk
             // 
-            this.ButtonOk.Location = new System.Drawing.Point(80, 224);
+            this.ButtonOk.Location = new System.Drawing.Point(80, 218);
             this.ButtonOk.Name = "ButtonOk";
             this.ButtonOk.Size = new System.Drawing.Size(75, 23);
             this.ButtonOk.TabIndex = 1;
@@ -141,11 +153,12 @@ namespace SWPatcher.Forms
             this.TabControl.Controls.Add(this.TabPageGame);
             this.TabControl.Controls.Add(this.TabPageCredentials);
             this.TabControl.Controls.Add(this.TabPagePatcher);
+            this.TabControl.Controls.Add(this.TabCustomClient);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabControl.Location = new System.Drawing.Point(3, 3);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(314, 215);
+            this.TabControl.Size = new System.Drawing.Size(314, 209);
             this.TabControl.TabIndex = 0;
             // 
             // TabPageGame
@@ -156,7 +169,7 @@ namespace SWPatcher.Forms
             this.TabPageGame.Location = new System.Drawing.Point(4, 22);
             this.TabPageGame.Name = "TabPageGame";
             this.TabPageGame.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageGame.Size = new System.Drawing.Size(306, 189);
+            this.TabPageGame.Size = new System.Drawing.Size(306, 183);
             this.TabPageGame.TabIndex = 0;
             this.TabPageGame.UseVisualStyleBackColor = true;
             // 
@@ -167,7 +180,7 @@ namespace SWPatcher.Forms
             this.GroupBoxGameOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GroupBoxGameOptions.Location = new System.Drawing.Point(3, 122);
             this.GroupBoxGameOptions.Name = "GroupBoxGameOptions";
-            this.GroupBoxGameOptions.Size = new System.Drawing.Size(300, 64);
+            this.GroupBoxGameOptions.Size = new System.Drawing.Size(300, 58);
             this.GroupBoxGameOptions.TabIndex = 3;
             this.GroupBoxGameOptions.TabStop = false;
             // 
@@ -238,7 +251,7 @@ namespace SWPatcher.Forms
             this.TabPageCredentials.Location = new System.Drawing.Point(4, 22);
             this.TabPageCredentials.Name = "TabPageCredentials";
             this.TabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageCredentials.Size = new System.Drawing.Size(306, 189);
+            this.TabPageCredentials.Size = new System.Drawing.Size(306, 183);
             this.TabPageCredentials.TabIndex = 1;
             this.TabPageCredentials.UseVisualStyleBackColor = true;
             // 
@@ -249,7 +262,7 @@ namespace SWPatcher.Forms
             this.GroupBoxGameWantLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GroupBoxGameWantLogin.Location = new System.Drawing.Point(3, 123);
             this.GroupBoxGameWantLogin.Name = "GroupBoxGameWantLogin";
-            this.GroupBoxGameWantLogin.Size = new System.Drawing.Size(300, 63);
+            this.GroupBoxGameWantLogin.Size = new System.Drawing.Size(300, 57);
             this.GroupBoxGameWantLogin.TabIndex = 2;
             this.GroupBoxGameWantLogin.TabStop = false;
             // 
@@ -309,7 +322,7 @@ namespace SWPatcher.Forms
             this.TabPagePatcher.Location = new System.Drawing.Point(4, 22);
             this.TabPagePatcher.Name = "TabPagePatcher";
             this.TabPagePatcher.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPagePatcher.Size = new System.Drawing.Size(306, 189);
+            this.TabPagePatcher.Size = new System.Drawing.Size(306, 183);
             this.TabPagePatcher.TabIndex = 2;
             this.TabPagePatcher.UseVisualStyleBackColor = true;
             // 
@@ -362,12 +375,95 @@ namespace SWPatcher.Forms
             this.TextBoxPatcherDirectory.Size = new System.Drawing.Size(207, 20);
             this.TextBoxPatcherDirectory.TabIndex = 0;
             // 
+            // TabCustomClient
+            // 
+            this.TabCustomClient.Controls.Add(this.groupBox1);
+            this.TabCustomClient.Controls.Add(this.groupBox2);
+            this.TabCustomClient.Controls.Add(this.groupBox3);
+            this.TabCustomClient.Location = new System.Drawing.Point(4, 22);
+            this.TabCustomClient.Name = "TabCustomClient";
+            this.TabCustomClient.Padding = new System.Windows.Forms.Padding(3);
+            this.TabCustomClient.Size = new System.Drawing.Size(306, 183);
+            this.TabCustomClient.TabIndex = 3;
+            this.TabCustomClient.Text = "Custom client";
+            this.TabCustomClient.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.ServerPortTextBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 122);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(300, 58);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Server Port";
+            // 
+            // ServerPortTextBox
+            // 
+            this.ServerPortTextBox.Location = new System.Drawing.Point(6, 19);
+            this.ServerPortTextBox.Name = "ServerPortTextBox";
+            this.ServerPortTextBox.Size = new System.Drawing.Size(99, 20);
+            this.ServerPortTextBox.TabIndex = 3;
+            this.ServerPortTextBox.TextChanged += new System.EventHandler(this.ServerPortTextBox_TextChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.AutoSize = true;
+            this.groupBox2.Controls.Add(this.ServerIpTextBox);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(3, 64);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(300, 58);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Server Ip";
+            // 
+            // ServerIpTextBox
+            // 
+            this.ServerIpTextBox.Location = new System.Drawing.Point(6, 19);
+            this.ServerIpTextBox.Name = "ServerIpTextBox";
+            this.ServerIpTextBox.Size = new System.Drawing.Size(207, 20);
+            this.ServerIpTextBox.TabIndex = 2;
+            this.ServerIpTextBox.TextChanged += new System.EventHandler(this.ServerIpTextBox_TextChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.AutoSize = true;
+            this.groupBox3.Controls.Add(this.CustomGamePathButton);
+            this.groupBox3.Controls.Add(this.CustomGamePathTextBox);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(300, 61);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Custom client directory";
+            // 
+            // CustomGamePathButton
+            // 
+            this.CustomGamePathButton.Location = new System.Drawing.Point(219, 19);
+            this.CustomGamePathButton.Name = "CustomGamePathButton";
+            this.CustomGamePathButton.Size = new System.Drawing.Size(75, 23);
+            this.CustomGamePathButton.TabIndex = 1;
+            this.CustomGamePathButton.UseVisualStyleBackColor = true;
+            this.CustomGamePathButton.Click += new System.EventHandler(this.CustomGamePathButton_Click_1);
+            // 
+            // CustomGamePathTextBox
+            // 
+            this.CustomGamePathTextBox.Location = new System.Drawing.Point(6, 21);
+            this.CustomGamePathTextBox.Name = "CustomGamePathTextBox";
+            this.CustomGamePathTextBox.ReadOnly = true;
+            this.CustomGamePathTextBox.Size = new System.Drawing.Size(207, 20);
+            this.CustomGamePathTextBox.TabIndex = 0;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.ButtonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 252);
+            this.ClientSize = new System.Drawing.Size(320, 246);
             this.Controls.Add(this.TableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -399,6 +495,14 @@ namespace SWPatcher.Forms
             this.GroupBoxUILanguagePicker.ResumeLayout(false);
             this.GroupBoxPatcherDirectory.ResumeLayout(false);
             this.GroupBoxPatcherDirectory.PerformLayout();
+            this.TabCustomClient.ResumeLayout(false);
+            this.TabCustomClient.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -431,5 +535,13 @@ namespace SWPatcher.Forms
         private System.Windows.Forms.ComboBox ComboBoxUILanguage;
         private System.Windows.Forms.GroupBox GroupBoxGameOptions;
         private System.Windows.Forms.Button ButtonOpenGameOptions;
+        private System.Windows.Forms.TabPage TabCustomClient;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox ServerPortTextBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox ServerIpTextBox;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button CustomGamePathButton;
+        private System.Windows.Forms.TextBox CustomGamePathTextBox;
     }
 }

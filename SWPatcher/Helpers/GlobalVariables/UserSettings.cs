@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -70,6 +70,54 @@ namespace SWPatcher.Helpers.GlobalVariables
             }
         }
 
+        internal static string CustomGamePath
+        {
+            get
+            {
+                return Settings.Default.CustomGameDirectory.Replace("\\\\", "\\");
+            }
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    value = value.Replace("\\\\", "\\");
+
+                    Methods.EnsureDirectoryRights(value);
+                    Settings.Default.CustomGameDirectory = value;
+                    Settings.Default.Save();
+                    Logger.Info($"Custom game path set to [{value}]");
+                }
+            }
+        }
+
+        internal static string CustomGameIp
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Settings.Default.CustomGameIp) ? "127.0.0.1" : Settings.Default.CustomGameIp;
+            }
+            set
+            {
+                Settings.Default.CustomGameIp = value;
+                Settings.Default.Save();
+                Logger.Info($"Custom game ip set to [{value}]");
+            }
+        }
+
+        internal static string CustomGamePort
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Settings.Default.CustomGamePort) ? "10000" : Settings.Default.CustomGamePort;
+            }
+            set
+            {
+                Settings.Default.CustomGamePort = value;
+                Settings.Default.Save();
+                Logger.Info($"Custom game port set to [{value}]");
+            }
+        }
+
         internal static bool WantToPatchExe
         {
             get
@@ -123,7 +171,7 @@ namespace SWPatcher.Helpers.GlobalVariables
                 Logger.Info($"Direct login choice set to [{value}]");
             }
         }
-        
+
         internal static string UILanguageCode
         {
             get

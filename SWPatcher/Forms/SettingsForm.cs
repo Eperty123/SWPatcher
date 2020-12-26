@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -34,8 +34,13 @@ namespace SWPatcher.Forms
     internal partial class SettingsForm : Form
     {
         private bool PendingRestart;
+
         //private string GameClientDirectory;
         private string PatcherWorkingDirectory;
+
+        private string ServerIp;
+        private string ServerPort;
+        private string CustomGamePath;
         private bool WantToPatchSoulworkerExe;
         private string GameUserId;
         private string GameUserPassword;
@@ -57,6 +62,7 @@ namespace SWPatcher.Forms
             this.TabPageGame.Text = StringLoader.GetText("tab_game");
             this.GroupBoxGameDirectory.Text = StringLoader.GetText("box_game_dir");
             this.ButtonOpenGameDirectory.Text = StringLoader.GetText("button_open");
+            this.CustomGamePathButton.Text = StringLoader.GetText("button_change");
             this.ButtonChangePatcherDirectory.Text = StringLoader.GetText("button_change");
             this.GroupBoxPatchExe.Text = StringLoader.GetText("box_patch_exe");
             this.CheckBoxPatchExe.Text = StringLoader.GetText("check_patch_exe");
@@ -76,6 +82,9 @@ namespace SWPatcher.Forms
         {
             this.PendingRestart = false;
             this.TextBoxGameDirectory.Text = UserSettings.GamePath;// = this.GameClientDirectory = UserSettings.GamePath;
+            this.ServerIpTextBox.Text = UserSettings.CustomGameIp;
+            this.ServerPortTextBox.Text = UserSettings.CustomGamePort;
+            this.CustomGamePathTextBox.Text = UserSettings.CustomGamePath;
             this.TextBoxPatcherDirectory.Text = this.PatcherWorkingDirectory = UserSettings.PatcherPath;
             this.CheckBoxPatchExe.Checked = this.WantToPatchSoulworkerExe = UserSettings.WantToPatchExe;
             this.TextBoxId.Text = this.GameUserId = UserSettings.GameId;
@@ -111,7 +120,7 @@ namespace SWPatcher.Forms
             {
                 this.ComboBoxUILanguage.SelectedItem = vi;
             }
-            else if(ru.Code == savedCode)
+            else if (ru.Code == savedCode)
             {
                 this.ComboBoxUILanguage.SelectedItem = ru;
             }
@@ -128,6 +137,9 @@ namespace SWPatcher.Forms
                 this.TextBoxPassword.TextChanged += this.EnableApplyButton;
                 this.CheckBoxWantToLogin.CheckedChanged += this.EnableApplyButton;
                 this.ComboBoxUILanguage.SelectedIndexChanged += this.EnableApplyButton;
+                this.CustomGamePathTextBox.TextChanged += this.EnableApplyButton;
+                this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
+                this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
             }
             else if ((this.Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)
             {
@@ -152,7 +164,7 @@ namespace SWPatcher.Forms
 
         private void ButtonOpenGameDirectory_Click(object sender, EventArgs e)
         {
-            Process.Start(this.TextBoxGameDirectory.Text);
+            Process.Start(UserSettings.GamePath);
         }
 
         private void ButtonChangePatcherDirectory_Click(object sender, EventArgs e)
@@ -284,6 +296,21 @@ namespace SWPatcher.Forms
                     this.PendingRestart = true;
                 }
 
+                if (UserSettings.CustomGamePath != this.CustomGamePath)
+                {
+                    UserSettings.CustomGamePath = this.CustomGamePath;
+                }
+
+                if (UserSettings.CustomGameIp != this.ServerIp)
+                {
+                    UserSettings.CustomGameIp = this.ServerIp;
+                }
+
+                if (UserSettings.CustomGamePort != this.ServerPort)
+                {
+                    UserSettings.CustomGamePort = this.ServerPort;
+                }
+
                 this.ButtonApply.Enabled = false;
 
                 if (this.PendingRestart)
@@ -384,6 +411,28 @@ namespace SWPatcher.Forms
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void CustomGamePathButton_Click_1(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                //UserSettings.CustomGamePath = fbd.SelectedPath;
+                CustomGamePathTextBox.Text = fbd.SelectedPath;
+                this.CustomGamePath = fbd.SelectedPath;
+            }
+        }
+
+        private void ServerIpTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.ServerIp = ServerIpTextBox.Text;
+        }
+
+        private void ServerPortTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.ServerPort = ServerPortTextBox.Text;
         }
     }
 }
