@@ -40,7 +40,7 @@ namespace SWPatcher.General
         internal static void LoadFileConfiguration(Language language)
         {
             string pathname = language.Path.StartsWith("jpc") ? "jp" + language.Path.Substring(3) : language.Path;
-            string packPath = Urls.OriginalTranslationGitHubHome + pathname + '/' + Strings.IniName.TranslationPackData;
+            string packPath = Urls.TranslationGitHubHome + pathname + '/' + Strings.IniName.TranslationPackData;
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), packPath));
             InternalLoadFileConfiguration(packPath);
         }

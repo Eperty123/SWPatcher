@@ -195,6 +195,11 @@ namespace SWPatcher.Launching
                             throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
                     }
                 }
+                else if (Language.ApplyingRegionId == "jpc")
+                {
+                    BackupAndPlaceFiles(this.Language);
+                    clientProcess = StartCustomGame();
+                }
                 else
                 {
                     BackupAndPlaceFiles(this.Language);
@@ -245,6 +250,12 @@ namespace SWPatcher.Launching
 
                             break;
 
+                        case "jpc":
+                            StartCustomGame();
+                            e.Cancel = true;
+
+                            break;
+
                         case "kr":
                             StartStoveKR();
                             e.Cancel = true;
@@ -256,7 +267,6 @@ namespace SWPatcher.Launching
 
                             break;
 
-                        case "jpc":
                         case "gf":
                             Methods.RegionDoesNotSupportLogin();
 
@@ -617,6 +627,24 @@ namespace SWPatcher.Launching
                 onSuccess?.Invoke();
 
                 return Process.Start(gameStartArg);
+            }
+        }
+
+        private static Process StartCustomGame(Action onSuccess = null)
+        {
+            using (var client = new MyWebClient())
+            {
+                var pi = new ProcessStartInfo
+                {
+                    FileName = UserSettings.CustomGamePath + "/" + Methods.GetGameExeName("jpc"),
+                    Arguments = $"IP:{UserSettings.CustomGameIp} PORT:{UserSettings.CustomGamePort} SkipWMModule:yes",
+                    WorkingDirectory = UserSettings.CustomGamePath,
+                    CreateNoWindow = false
+                };
+
+                onSuccess?.Invoke();
+
+                return Process.Start(pi);
             }
         }
 

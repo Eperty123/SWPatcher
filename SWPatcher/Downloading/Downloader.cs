@@ -122,7 +122,7 @@ namespace SWPatcher.Downloading
         private void DownloadNext(int index)
         {
             string pathname = Language.Path.StartsWith("jpc") ? "jp" + Language.Path.Substring(3) : Language.Path;
-            Uri uri = new Uri(Urls.OriginalTranslationGitHubHome + pathname + '/' + SWFileManager.GetElementAt(index).PathD);
+            Uri uri = new Uri(Urls.TranslationGitHubHome + pathname + '/' + SWFileManager.GetElementAt(index).PathD);
             this.Client.DownloadDataAsync(uri, index);
 
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), uri.AbsoluteUri));

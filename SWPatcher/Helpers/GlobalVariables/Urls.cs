@@ -21,15 +21,16 @@ namespace SWPatcher.Helpers.GlobalVariables
     internal sealed class Urls
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
+        internal const string ForkWebsite = "https://github.com/Asaduji/SWPatcher";
 #if DEBUG
 
         //internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
-                internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
+        //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
+        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
 
 #else
         internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
 #endif
-        internal const string OriginalTranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
         internal const string SoulworkerSettingsHome = "http://patch-cdn.soulworker.gamecom.jp/SWK/update/";
         internal const string SoulworkerJPHangeHome = "http://soulworker.hange.jp/";
         internal const string SoulworkerJPGamecomHome = "http://soulworker.gamecom.jp/";

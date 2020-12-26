@@ -301,7 +301,7 @@ namespace SWPatcher.Forms
             XmlElement configRoot = doc.DocumentElement;
             XmlElement xmlRegions = configRoot[Strings.Xml.Regions];
             int regionCount = xmlRegions.ChildNodes.Count;
-            Region[] regions = new Region[regionCount];
+            List<Region> regions = new List<Region>();
 
             for (int i = 0; i < regionCount; i++)
             {
@@ -335,22 +335,43 @@ namespace SWPatcher.Forms
                         regionLanguages[j] = new Language(languageId, languageName, languageDate, regionId, regionFolder);
                     }
 
-                    regions[i] = new Region(regionId, regionName, regionFolder, regionLanguages);
+                    regions.Add(new Region(regionId, regionName, regionFolder, regionLanguages));
+                    if (regionId == "jp")
+                    {
+                        Language[] lngs = new Language[regionLanguages.Length];
+                        for (int c = 0; c < regionLanguages.Length; c++)
+                        {
+                            lngs[c] = new Language(regionLanguages[c].Id, regionLanguages[c].Name, regionLanguages[c].LastUpdate, "jpc", "jpc");
+                        }
+                        regions.Add(new Region("jpc", StringLoader.GetText("form_region_jpc"), "jpc", lngs));
+                    }
                 }
                 else
                 {
-                    Region linkedRegion = regions.Where(r => r.Id == languagesLinkId).First();
+                    Region linkedRegion = regions.Where(r => r.Id == languagesLinkId).FirstOrDefault();
                     var regionLanguages = new List<Language>();
-                    foreach (var l in linkedRegion.AppliedLanguages)
+                    if (linkedRegion != null)
                     {
-                        regionLanguages.Add(new Language(l.Id, l.Name, l.LastUpdate, regionId, regionFolder));
+                        foreach (var l in linkedRegion.AppliedLanguages)
+                        {
+                            regionLanguages.Add(new Language(l.Id, l.Name, l.LastUpdate, regionId, regionFolder));
+                        }
                     }
-
-                    regions[i] = new Region(regionId, regionName, regionFolder, regionLanguages.ToArray());
+                    var regionLanguagesArr = regionLanguages.ToArray();
+                    regions.Add(new Region(regionId, regionName, regionFolder, regionLanguagesArr));
+                    if (regionId == "jp")
+                    {
+                        Language[] lngs = new Language[regionLanguagesArr.Length];
+                        for (int c = 0; c < regionLanguagesArr.Length; c++)
+                        {
+                            lngs[c] = new Language(regionLanguagesArr[c].Id, regionLanguagesArr[c].Name, regionLanguagesArr[c].LastUpdate, "jpc", "jpc");
+                        }
+                        regions.Add(new Region("jpc", StringLoader.GetText("form_region_jpc"), "jpc", lngs));
+                    }
                 }
             }
 
-            this.ComboBoxRegions.DataSource = regions.Length > 0 ? regions : null;
+            this.ComboBoxRegions.DataSource = regions.Count > 0 ? regions : null;
 
             if (this.ComboBoxRegions.DataSource != null)
             {

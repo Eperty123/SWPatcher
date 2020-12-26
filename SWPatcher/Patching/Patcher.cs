@@ -93,7 +93,8 @@ namespace SWPatcher.Patching
 
             this.CurrentState = State.Load;
             IEnumerable<ArchivedSWFile> archivedSWFiles = SWFileManager.GetFiles().OfType<ArchivedSWFile>();
-            string datasArchivesPath = Urls.TranslationGitHubHome + this.Language.ApplyingRegionFolder + '/' + Strings.IniName.DatasArchives;
+            string regionFldr = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
+            string datasArchivesPath = Urls.TranslationGitHubHome + regionFldr + '/' + Strings.IniName.DatasArchives;
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), datasArchivesPath));
             Dictionary<string, string> passwordDictionary = LoadPasswords(datasArchivesPath);
             int archivedSWFilesCount = archivedSWFiles.Count();
