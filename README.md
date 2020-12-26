@@ -3,9 +3,9 @@
 _This is a fork of [SWPatcher](https://github.com/Miyuyami/SWPatcher) that supports JP custom clients_
 
 ## How to use
-```
-The usage is almost the same as the original SWPatcher
-```
+
+The usage is almost the same as the original SWPatcher, to open it run SWPatcher.exe
+
 ### How to select the client path
 ```
 Go to Settings > Custom client and select the client path, then click on apply
