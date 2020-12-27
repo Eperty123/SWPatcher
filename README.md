@@ -1,6 +1,6 @@
 # SW Patcher
 
-_This is a fork of [SWPatcher](https://github.com/Miyuyami/SWPatcher) that supports JP custom clients_
+_This is a fork of [SWPatcher](https://github.com/Miyuyami/SWPatcher) that supports JP custom clients (jp clients only, kr soon)_
 
 ## How to use
 
