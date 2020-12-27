@@ -376,6 +376,12 @@ namespace SWPatcher.Patching
 
                 Directory.CreateDirectory(archivePathDirectory);
 
+                //Dirty af but will prevent "Not a valid Win32 FileTime" error
+                foreach (ZipEntry ze in zipFile.Entries)
+                {
+                    ze.ModifiedTime = DateTime.Now;
+                }
+
                 using (var fs = new MemoryStream())
                 {
                     zipFile.Save(fs);

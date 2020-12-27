@@ -286,6 +286,12 @@ namespace SWPatcher.Forms
                     {
                         (this.Owner as MainForm).CurrentState = MainForm.State.Idle;
                     }
+                    var region = (this.Owner as MainForm).GetSelectedRegion();
+                    if (region != null && region.Id == "jpc")
+                    {
+                        this.TextBoxGameDirectory.Text = this.CustomGamePath;
+                        UserSettings.GamePath = this.CustomGamePath;
+                    }
                 }
 
                 if (UserSettings.CustomGameIp != this.ServerIp)
@@ -407,6 +413,11 @@ namespace SWPatcher.Forms
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
                 //UserSettings.CustomGamePath = fbd.SelectedPath;
+                if (!Methods.IsValidSwPath(fbd.SelectedPath))
+                {
+                    MsgBox.Error("Please select a valid client path");
+                    return;
+                }
                 CustomGamePathTextBox.Text = fbd.SelectedPath;
                 this.CustomGamePath = fbd.SelectedPath;
                 if (!ButtonApply.Enabled) ButtonApply.Enabled = true;

@@ -182,6 +182,11 @@ namespace SWPatcher.Helpers
             return String.IsNullOrEmpty(path) || !IsSwPath(path) && IsValidSwPatcherPath(Path.GetDirectoryName(path));
         }
 
+        internal static bool IsValidSwPath(string path)
+        {
+            return Directory.GetFiles(path).Any(x => x.Contains(Strings.FileName.GameExeJP));
+        }
+
         internal static IniFile GetJPServerIni()
         {
             using (var client = new WebClient())
