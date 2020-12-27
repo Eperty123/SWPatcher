@@ -1,12 +1,12 @@
 ﻿/*
  * This file is part of Soulworker Patcher.
  * Copyright (C) 2016-2017 Miyu, Dramiel Leayal
- * 
+ *
  * Soulworker Patcher is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Soulworker Patcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -38,7 +38,7 @@ namespace SWPatcher.Helpers
 
         private class LogMessage
         {
-			internal DateTime DateTime;
+            internal DateTime DateTime;
             internal LogType LogType;
             internal string Message;
         }
@@ -52,7 +52,7 @@ namespace SWPatcher.Helpers
         {
             _messages.Add(new LogMessage
             {
-				DateTime = DateTime.UtcNow,
+                DateTime = DateTime.UtcNow,
                 LogType = logType,
                 Message = message,
             });
@@ -102,7 +102,10 @@ namespace SWPatcher.Helpers
 #if DEBUG && !ENCRYPT_LOG
             File.AppendAllText(Strings.FileName.Log, logEntry);
 #else
+
             #region Silly "Encryption"
+
+            /*
             byte[] messageBytes = System.Text.Encoding.Unicode.GetBytes(logEntry);
             ushort[] messageShorts = new ushort[messageBytes.Length / 2];
 
@@ -117,7 +120,11 @@ namespace SWPatcher.Helpers
                     bw.Write(messageShorts[index]);
                 }
             }
-            #endregion
+            */
+            File.AppendAllText("swpatcher" + Strings.FileName.Log, logEntry);
+
+            #endregion Silly "Encryption"
+
 #endif
         }
 
@@ -142,14 +149,17 @@ namespace SWPatcher.Helpers
                         WriteLog(msg.DateTime, "INFO", msg.Message);
 
                         break;
+
                     case LogType.Debug:
                         WriteLog(msg.DateTime, "DEBUG", msg.Message);
 
                         break;
+
                     case LogType.Error:
                         WriteLog(msg.DateTime, "ERROR", msg.Message);
 
                         break;
+
                     case LogType.Critical:
                         WriteLog(msg.DateTime, "CRIT", msg.Message);
 

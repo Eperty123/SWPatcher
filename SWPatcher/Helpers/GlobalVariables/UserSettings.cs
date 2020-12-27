@@ -74,7 +74,7 @@ namespace SWPatcher.Helpers.GlobalVariables
         {
             get
             {
-                return Settings.Default.CustomGameDirectory.Replace("\\\\", "\\");
+                return string.IsNullOrWhiteSpace(Settings.Default.CustomGameDirectory) ? "" : Settings.Default.CustomGameDirectory.Replace("\\\\", "\\");
             }
             set
             {
