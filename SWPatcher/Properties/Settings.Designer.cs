@@ -34,52 +34,7 @@ namespace SWPatcher.Properties {
                 this["GameDirectory"] = value;
             }
         }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomGameDirectory
-        {
-            get
-            {
-                return ((string)(this["CustomGameDirectory"]));
-            }
-            set
-            {
-                this["CustomGameDirectory"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomGameIp
-        {
-            get
-            {
-                return ((string)(this["CustomGameIp"]));
-            }
-            set
-            {
-                this["CustomGameIp"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomGamePort
-        {
-            get
-            {
-                return ((string)(this["CustomGamePort"]));
-            }
-            set
-            {
-                this["CustomGamePort"] = value;
-            }
-        }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -173,6 +128,42 @@ namespace SWPatcher.Properties {
             }
             set {
                 this["RegionId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomGameDirectory {
+            get {
+                return ((string)(this["CustomGameDirectory"]));
+            }
+            set {
+                this["CustomGameDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomGameIp {
+            get {
+                return ((string)(this["CustomGameIp"]));
+            }
+            set {
+                this["CustomGameIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomGamePort {
+            get {
+                return ((string)(this["CustomGamePort"]));
+            }
+            set {
+                this["CustomGamePort"] = value;
             }
         }
     }
