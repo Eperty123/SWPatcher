@@ -771,6 +771,15 @@ namespace SWPatcher.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Japan Custom.
+        /// </summary>
+        internal static string form_region_jpc {
+            get {
+                return ResourceManager.GetString("form_region_jpc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 한국.
         /// </summary>
         internal static string form_region_kr {

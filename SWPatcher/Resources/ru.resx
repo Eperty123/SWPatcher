@@ -452,4 +452,7 @@ Soulworker Patcher был сделан, чтобы легко исправлят
   <data name="form_region_gjp" xml:space="preserve">
     <value>Япония Gamecom</value>
   </data>
+  <data name="form_region_jpc" xml:space="preserve">
+    <value>Japan Custom</value>
+  </data>
 </root>

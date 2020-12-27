@@ -457,4 +457,7 @@ Danh sách đối chiếu:
   <data name="form_region_gjp" xml:space="preserve">
     <value>Nhật Bản Gamecom</value>
   </data>
+  <data name="form_region_jpc" xml:space="preserve">
+    <value>Japanese Custom</value>
+  </data>
 </root>

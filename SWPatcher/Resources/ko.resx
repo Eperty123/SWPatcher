@@ -458,4 +458,7 @@ This is free software, and you are welcome to redistribute it under certain cond
   <data name="form_region_gjp" xml:space="preserve">
     <value>일본 Gamecom</value>
   </data>
+  <data name="form_region_jpc" xml:space="preserve">
+    <value>Japan Custom</value>
+  </data>
 </root>
