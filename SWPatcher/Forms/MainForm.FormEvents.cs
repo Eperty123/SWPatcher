@@ -32,7 +32,7 @@ namespace SWPatcher.Forms
         {
             this.InitRegionsConfigData();
 
-            StartupBackupCheck(this.ComboBoxLanguages.SelectedItem as Language);
+            if (this.ComboBoxLanguages.SelectedItem != null) StartupBackupCheck(this.ComboBoxLanguages.SelectedItem as Language);
 
             if (!Methods.IsValidSwPatcherPath(UserSettings.PatcherPath))
             {

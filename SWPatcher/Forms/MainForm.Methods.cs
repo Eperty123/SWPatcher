@@ -378,7 +378,15 @@ namespace SWPatcher.Forms
             {
                 if (String.IsNullOrEmpty(UserSettings.RegionId))
                 {
-                    UserSettings.RegionId = (this.ComboBoxRegions?.SelectedItem as Region)?.Id ?? "jpc";
+                    if (this.ComboBoxRegions.SelectedItem == null && this.ComboBoxRegions.Items.Count > 0)
+                    {
+                        this.ComboBoxRegions.SelectedItem = this.ComboBoxRegions.Items[0];
+                        UserSettings.RegionId = (this.ComboBoxRegions.SelectedItem as Region).Id;
+                    }
+                    else
+                    {
+                        UserSettings.RegionId = (this.ComboBoxRegions?.SelectedItem as Region)?.Id ?? "jpc";
+                    }
                 }
                 else
                 {
