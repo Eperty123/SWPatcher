@@ -301,6 +301,7 @@ namespace SWPatcher.Forms
             XmlElement configRoot = doc.DocumentElement;
             XmlElement xmlRegions = configRoot[Strings.Xml.Regions];
             int regionCount = xmlRegions.ChildNodes.Count;
+            Logger.Debug($"Got {regionCount} regions");
             List<Region> regions = new List<Region>();
 
             for (int i = 0; i < regionCount; i++)
@@ -377,7 +378,7 @@ namespace SWPatcher.Forms
             {
                 if (String.IsNullOrEmpty(UserSettings.RegionId))
                 {
-                    UserSettings.RegionId = (this.ComboBoxRegions.SelectedItem as Region).Id;
+                    UserSettings.RegionId = (this.ComboBoxRegions?.SelectedItem as Region)?.Id ?? "jpc";
                 }
                 else
                 {
