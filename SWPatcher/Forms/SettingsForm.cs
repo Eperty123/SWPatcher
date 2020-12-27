@@ -279,7 +279,7 @@ namespace SWPatcher.Forms
                     this.PendingRestart = true;
                 }
 
-                if (UserSettings.CustomGamePath != this.CustomGamePath)
+                if (UserSettings.CustomGamePath != this.CustomGamePath && this.CustomGamePath != null)
                 {
                     UserSettings.CustomGamePath = this.CustomGamePath;
                     if ((this.Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)

@@ -401,8 +401,8 @@ namespace SWPatcher.Patching
             {
                 this.CurrentState = State.ExePatch;
 
-                string regionId = this.Language.ApplyingRegionId;
-                string regionFolder = this.Language.ApplyingRegionFolder;
+                string regionId = this.Language.ApplyingRegionId == "jpc" ? "jp" : this.Language.ApplyingRegionId;
+                string regionFolder = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
                 string gameExePath = Path.Combine(UserSettings.GamePath, Methods.GetGameExeName(regionId));
                 byte[] gameExeBytes = File.ReadAllBytes(gameExePath);
                 string gameExePatchedPath = Path.Combine(UserSettings.PatcherPath, regionFolder, Methods.GetGameExeName(regionId));

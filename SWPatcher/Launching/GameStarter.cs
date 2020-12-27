@@ -80,8 +80,8 @@ namespace SWPatcher.Launching
 
                 if (UserSettings.WantToPatchExe)
                 {
-                    string regionId = this.Language.ApplyingRegionId;
-                    string regionFolder = this.Language.ApplyingRegionFolder;
+                    string regionId = this.Language.ApplyingRegionId == "jpc" ? "jp" : this.Language.ApplyingRegionId;
+                    string regionFolder = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
                     string gameExePath = Path.Combine(UserSettings.GamePath, Methods.GetGameExeName(regionId));
                     string gameExePatchedPath = Path.Combine(UserSettings.PatcherPath, regionId, Methods.GetGameExeName(regionId));
                     string backupFilePath = Path.Combine(this.Language.BackupPath, Methods.GetGameExeName(regionId));
