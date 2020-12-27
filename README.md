@@ -6,6 +6,7 @@ For support you can join the discord chat https://discord.gg/Kbevduh46w
 ## How to use
 
 The usage is almost the same as the original SWPatcher, to open it run SWPatcher.exe
+Make sure you select region "Japan Custom" if you want to launch a custom client
 
 ### How to select the client path
 ```
