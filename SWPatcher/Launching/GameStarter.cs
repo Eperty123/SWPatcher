@@ -636,10 +636,12 @@ namespace SWPatcher.Launching
             {
                 var pi = new ProcessStartInfo
                 {
-                    FileName = UserSettings.CustomGamePath + "/" + Methods.GetGameExeName("jpc"),
+                    FileName = Path.Combine(UserSettings.CustomGamePath, Methods.GetGameExeName("jpc")),
                     Arguments = $"IP:{UserSettings.CustomGameIp} PORT:{UserSettings.CustomGamePort} SkipWMModule:yes",
                     WorkingDirectory = UserSettings.CustomGamePath,
-                    CreateNoWindow = false
+                    CreateNoWindow = false,
+                    UseShellExecute = true,
+                    Verb = "runas"
                 };
 
                 onSuccess?.Invoke();
