@@ -28,14 +28,15 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/publish/</InstallUrl>
-    <UpdateUrl>https://raw.githubusercontent.com/Miyuyami/SWPatcher/master/SWPatcher/publish/</UpdateUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/publish/</UpdateUrl>
+    <SupportUrl>https://discord.gg/Kbevduh46w</SupportUrl>
     <TargetCulture>en</TargetCulture>
-    <ProductName>Soulworker Patcher</ProductName>
-    <PublisherName>Miyu</PublisherName>
-    <MinimumRequiredVersion>2.13.0.0</MinimumRequiredVersion>
+    <ProductName>Soulworker Patcher Custom</ProductName>
+    <PublisherName>Miyu - Asaduji</PublisherName>
+    <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -76,7 +77,7 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>Internet</TargetZone>
@@ -369,9 +370,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 y x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
