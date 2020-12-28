@@ -32,3 +32,7 @@ Go to Settings > Custom client and select the client path, then click on apply
 ```
 Your game path probably contains special characters, rename it and try again
 ```
+### When i try to set the game path it shows "Cannot start process because a file name has not been provided" or just opens a folder
+```
+You clicked on "Open" at Soulworker tab on settings, to change the game path go to Custom client tab
+```
