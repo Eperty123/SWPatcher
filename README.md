@@ -39,5 +39,5 @@ You clicked on "Open" at Soulworker tab on settings, to change the game path go 
 ```
 ### When i click on force patch or play button it shows a "Codepage Fix" error
 ```
-You enabled the option to patch the .exe to support unicode language, this is no longer needed on current clients so don't enable it
+You enabled the option to patch the .exe to support unicode languages, this is no longer needed on current clients so don't use it
 ```
