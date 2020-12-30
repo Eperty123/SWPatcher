@@ -5,7 +5,8 @@ _This is a fork of [SWPatcher](https://github.com/Miyuyami/SWPatcher) that suppo
 For support you can join the discord chat https://discord.gg/Kbevduh46w
 ## How to use
 
-The usage is almost the same as the original SWPatcher, to open it run SWPatcher.exe
+The usage is almost the same as the original SWPatcher, install it through the [installer](https://github.com/Asaduji/SWPatcher/releases/latest) and open it from the shortcut
+
 Make sure you select region "Japan Custom" if you want to launch a custom client
 
 ### How to select the client path
@@ -31,4 +32,12 @@ Go to Settings > Custom client and select the client path, then click on apply
 ### I got the error "The path is not of a legal form" after clicking on ready to play or force patch
 ```
 Your game path probably contains special characters, rename it and try again
+```
+### When i try to set the game path it shows "Cannot start process because a file name has not been provided" or just opens a folder
+```
+You clicked on "Open" at Soulworker tab on settings, to change the game path go to Custom client tab
+```
+### When i click on force patch or play button it shows a "Codepage Fix" error
+```
+You enabled the option to patch the .exe to support unicode languages, this is no longer needed on current clients so don't use it
 ```
