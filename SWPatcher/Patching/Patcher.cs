@@ -396,7 +396,9 @@ namespace SWPatcher.Patching
                     File.WriteAllBytes(archivePath, buffer);
                 }
             }
-
+            /*
+             * Disabled for now since it's useless
+             *
             if (UserSettings.WantToPatchExe)
             {
                 this.CurrentState = State.ExePatch;
@@ -409,6 +411,7 @@ namespace SWPatcher.Patching
 
                 Methods.PatchExeFile(gameExeBytes, gameExePatchedPath, Urls.TranslationGitHubHome + regionFolder + '/' + Strings.IniName.BytesToPatch);
             }
+            */
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

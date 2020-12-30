@@ -22,15 +22,41 @@ namespace SWPatcher.Helpers.GlobalVariables
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
         internal const string ForkWebsite = "https://github.com/Asaduji/SWPatcher";
+        /*
 #if DEBUG
 
         //internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
         //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
-        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
+        internal static string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
 
 #else
-        internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
+        internal static string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
 #endif
+        */
+
+        private static readonly string DefaultTranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
+        private static string CurrentTranslationPath;
+
+        internal static string TranslationGitHubHome
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(CurrentTranslationPath))
+                {
+                    return DefaultTranslationGitHubHome;
+                }
+                return CurrentTranslationPath;
+            }
+            set
+            {
+                CurrentTranslationPath = value;
+                if (!CurrentTranslationPath.EndsWith("/") && !CurrentTranslationPath.EndsWith("\\"))
+                {
+                    CurrentTranslationPath += "/";
+                }
+            }
+        }
+
         internal const string SoulworkerSettingsHome = "http://patch-cdn.soulworker.gamecom.jp/SWK/update/";
         internal const string SoulworkerJPHangeHome = "http://soulworker.hange.jp/";
         internal const string SoulworkerJPGamecomHome = "http://soulworker.gamecom.jp/";

@@ -211,5 +211,44 @@ namespace SWPatcher.Helpers.GlobalVariables
                 Settings.Default.Save();
             }
         }
+
+        internal static bool UpdateSettings
+        {
+            get
+            {
+                return Settings.Default.UpdateSettings;
+            }
+            set
+            {
+                Settings.Default.UpdateSettings = value;
+                Settings.Default.Save();
+            }
+        }
+
+        internal static bool UseCustomTranslationServer
+        {
+            get
+            {
+                return Settings.Default.UseCustomTranslationServer;
+            }
+            set
+            {
+                Settings.Default.UseCustomTranslationServer = value;
+                Settings.Default.Save();
+            }
+        }
+
+        internal static string CustomTranslationServer
+        {
+            get
+            {
+                return Settings.Default.CustomTranslationServer ?? "";
+            }
+            set
+            {
+                Settings.Default.CustomTranslationServer = value;
+                Settings.Default.Save();
+            }
+        }
     }
 }

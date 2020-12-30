@@ -296,7 +296,22 @@ namespace SWPatcher.Forms
             var doc = new XmlDocument();
             string xmlPath = Urls.TranslationGitHubHome + Strings.IniName.LanguagePack;
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), xmlPath));
-            doc.Load(xmlPath);
+            try
+            {
+                doc.Load(xmlPath);
+            }
+            catch (Exception e)
+            {
+                if (e is FileNotFoundException || e is DirectoryNotFoundException)
+                {
+                    MsgBox.Error("Unable to find LanguagePacks.xml at the specified translations source, change the source and try again.");
+                    return;
+                }
+                else
+                {
+                    throw e;
+                }
+            }
 
             XmlElement configRoot = doc.DocumentElement;
             XmlElement xmlRegions = configRoot[Strings.Xml.Regions];

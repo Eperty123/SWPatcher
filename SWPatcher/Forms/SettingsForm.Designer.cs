@@ -80,6 +80,13 @@ namespace SWPatcher.Forms
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CustomGamePathButton = new System.Windows.Forms.Button();
             this.CustomGamePathTextBox = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.CustomSourceWarnLabel = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TranslationSourceCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.TranslationSourceTextBox = new System.Windows.Forms.TextBox();
             this.TableLayoutPanel.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.TabPageGame.SuspendLayout();
@@ -97,6 +104,9 @@ namespace SWPatcher.Forms
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // TableLayoutPanel
@@ -154,6 +164,7 @@ namespace SWPatcher.Forms
             this.TabControl.Controls.Add(this.TabPageCredentials);
             this.TabControl.Controls.Add(this.TabPagePatcher);
             this.TabControl.Controls.Add(this.TabCustomClient);
+            this.TabControl.Controls.Add(this.tabPage1);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabControl.Location = new System.Drawing.Point(3, 3);
             this.TabControl.Name = "TabControl";
@@ -458,6 +469,77 @@ namespace SWPatcher.Forms
             this.CustomGamePathTextBox.Size = new System.Drawing.Size(207, 20);
             this.CustomGamePathTextBox.TabIndex = 0;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.CustomSourceWarnLabel);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(306, 183);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "Translations";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // CustomSourceWarnLabel
+            // 
+            this.CustomSourceWarnLabel.AutoSize = true;
+            this.CustomSourceWarnLabel.Location = new System.Drawing.Point(6, 128);
+            this.CustomSourceWarnLabel.Name = "CustomSourceWarnLabel";
+            this.CustomSourceWarnLabel.Size = new System.Drawing.Size(0, 13);
+            this.CustomSourceWarnLabel.TabIndex = 5;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.AutoSize = true;
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.TranslationSourceCheckBox);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(3, 63);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(300, 58);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Use custom translations source";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // TranslationSourceCheckBox
+            // 
+            this.TranslationSourceCheckBox.AutoSize = true;
+            this.TranslationSourceCheckBox.Location = new System.Drawing.Point(6, 25);
+            this.TranslationSourceCheckBox.Name = "TranslationSourceCheckBox";
+            this.TranslationSourceCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.TranslationSourceCheckBox.TabIndex = 0;
+            this.TranslationSourceCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.AutoSize = true;
+            this.groupBox6.Controls.Add(this.TranslationSourceTextBox);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(300, 60);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Translations source";
+            // 
+            // TranslationSourceTextBox
+            // 
+            this.TranslationSourceTextBox.Location = new System.Drawing.Point(6, 21);
+            this.TranslationSourceTextBox.Name = "TranslationSourceTextBox";
+            this.TranslationSourceTextBox.Size = new System.Drawing.Size(278, 20);
+            this.TranslationSourceTextBox.TabIndex = 0;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.ButtonOk;
@@ -503,6 +585,12 @@ namespace SWPatcher.Forms
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -543,5 +631,12 @@ namespace SWPatcher.Forms
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button CustomGamePathButton;
         private System.Windows.Forms.TextBox CustomGamePathTextBox;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox TranslationSourceTextBox;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox TranslationSourceCheckBox;
+        private System.Windows.Forms.Label CustomSourceWarnLabel;
+        private System.Windows.Forms.Label label1;
     }
 }

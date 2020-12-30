@@ -76,6 +76,7 @@ namespace SWPatcher.Forms
             this.GroupBoxUILanguagePicker.Text = StringLoader.GetText("box_language");
             this.GroupBoxGameOptions.Text = StringLoader.GetText("box_game_options");
             this.ButtonOpenGameOptions.Text = StringLoader.GetText("button_game_options");
+            this.CustomSourceWarnLabel.Text = "NOTE: The translation source can be a url or a path.\nMake sure it has the correct format, otherwise it won't work.";
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
@@ -89,6 +90,8 @@ namespace SWPatcher.Forms
             this.CheckBoxPatchExe.Checked = this.WantToPatchSoulworkerExe = UserSettings.WantToPatchExe;
             this.TextBoxId.Text = this.GameUserId = UserSettings.GameId;
             this.TextBoxId.Enabled = this.TextBoxPassword.Enabled = this.CheckBoxWantToLogin.Checked = this.WantToLogin = UserSettings.WantToLogin;
+            this.TranslationSourceTextBox.Text = UserSettings.CustomTranslationServer;
+            this.TranslationSourceCheckBox.Checked = UserSettings.UseCustomTranslationServer;
 
             string maskedEmptyString = SHA256String(String.Empty);
             string maskedGamePw = MaskPassword(UserSettings.GamePw);
@@ -138,6 +141,8 @@ namespace SWPatcher.Forms
             this.CustomGamePathTextBox.TextChanged += this.EnableApplyButton;
             this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
             this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
+            this.TranslationSourceCheckBox.CheckedChanged += this.EnableApplyButton;
+            this.TranslationSourceTextBox.TextChanged += this.EnableApplyButton;
         }
 
         private void EnableApplyButton(object sender, EventArgs e)
@@ -147,7 +152,11 @@ namespace SWPatcher.Forms
 
         private void ButtonOpenGameDirectory_Click(object sender, EventArgs e)
         {
-            Process.Start(UserSettings.GamePath);
+            string path = UserSettings.GamePath;
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                Process.Start(path);
+            }
         }
 
         private void ButtonChangePatcherDirectory_Click(object sender, EventArgs e)
@@ -304,6 +313,18 @@ namespace SWPatcher.Forms
                     UserSettings.CustomGamePort = this.ServerPort;
                 }
 
+                if (UserSettings.CustomTranslationServer != this.TranslationSourceTextBox.Text)
+                {
+                    UserSettings.CustomTranslationServer = this.TranslationSourceTextBox.Text;
+                    this.PendingRestart = true;
+                }
+
+                if (UserSettings.UseCustomTranslationServer != this.TranslationSourceCheckBox.Checked)
+                {
+                    UserSettings.UseCustomTranslationServer = this.TranslationSourceCheckBox.Checked;
+                    this.PendingRestart = true;
+                }
+
                 this.ButtonApply.Enabled = false;
 
                 if (this.PendingRestart)
@@ -432,6 +453,11 @@ namespace SWPatcher.Forms
         private void ServerPortTextBox_TextChanged(object sender, EventArgs e)
         {
             this.ServerPort = ServerPortTextBox.Text;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.TranslationSourceCheckBox.Checked = !this.TranslationSourceCheckBox.Checked;
         }
     }
 }
