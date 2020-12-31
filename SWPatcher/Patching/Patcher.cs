@@ -29,6 +29,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace SWPatcher.Patching
@@ -451,7 +452,11 @@ namespace SWPatcher.Patching
                     }
                 }
 
-                ulong id = Convert.ToUInt64(currentData[idIndex].Substring(idTextLength));
+
+                //ulong id = Convert.ToUInt64(currentData[idIndex].Substring(idTextLength));
+                string id_string = Regex.Match(currentData[idIndex], @"ID=([0-9]+)").Groups[1].Value;
+                ulong id = 0;
+                ulong.TryParse(id_string, out id);
                 List<string> dataList = currentData.ToList();
                 dataList.RemoveAt(idIndex);
                 string[] data = dataList.ToArray();
