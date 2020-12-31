@@ -427,7 +427,6 @@ namespace SWPatcher.Patching
 
         private Dictionary<ulong, string[]> ReadInputFile(byte[] fileBytes, int lineCount, int idIndex)
         {
-            int idTextLength = 3;
             int emptyLineCount = 1;
             int idLineCount = 1;
             lineCount += idLineCount;

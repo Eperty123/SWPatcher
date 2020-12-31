@@ -21,12 +21,12 @@ namespace SWPatcher.Helpers.GlobalVariables
     internal sealed class Urls
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
-        internal const string ForkWebsite = "https://github.com/Asaduji/SWPatcher";
+        internal const string ForkWebsite = "https://github.com/Eperty123/SWPatcher";
         /*
 #if DEBUG
 
         //internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
-        //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
+        //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Eperty123/SWPatcher/master/SWPatcher/Translations/";
         internal static string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
 
 #else
