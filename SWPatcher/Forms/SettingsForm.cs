@@ -92,6 +92,7 @@ namespace SWPatcher.Forms
             this.TextBoxId.Enabled = this.TextBoxPassword.Enabled = this.CheckBoxWantToLogin.Checked = this.WantToLogin = UserSettings.WantToLogin;
             this.TranslationSourceTextBox.Text = UserSettings.CustomTranslationServer;
             this.TranslationSourceCheckBox.Checked = UserSettings.UseCustomTranslationServer;
+            this.TranslationBypassDateCheckBox.Checked = UserSettings.BypassTranslationDateCheck;
 
             string maskedEmptyString = SHA256String(String.Empty);
             string maskedGamePw = MaskPassword(UserSettings.GamePw);
@@ -142,6 +143,7 @@ namespace SWPatcher.Forms
             this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
             this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
             this.TranslationSourceCheckBox.CheckedChanged += this.EnableApplyButton;
+            this.TranslationBypassDateCheckBox.CheckedChanged += this.EnableApplyButton;
             this.TranslationSourceTextBox.TextChanged += this.EnableApplyButton;
         }
 
@@ -325,6 +327,11 @@ namespace SWPatcher.Forms
                     this.PendingRestart = true;
                 }
 
+                if (UserSettings.BypassTranslationDateCheck != this.TranslationBypassDateCheckBox.Checked)
+                {
+                    UserSettings.BypassTranslationDateCheck = this.TranslationBypassDateCheckBox.Checked;
+                }
+
                 this.ButtonApply.Enabled = false;
 
                 if (this.PendingRestart)
@@ -458,6 +465,11 @@ namespace SWPatcher.Forms
         private void label1_Click(object sender, EventArgs e)
         {
             this.TranslationSourceCheckBox.Checked = !this.TranslationSourceCheckBox.Checked;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            this.TranslationBypassDateCheckBox.Checked = !this.TranslationBypassDateCheckBox.Checked;
         }
     }
 }
