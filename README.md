@@ -29,15 +29,3 @@ Force patch
 ```
 Go to Settings > Custom client and select the client path, then click on apply
 ```
-### I got the error "The path is not of a legal form" after clicking on ready to play or force patch
-```
-Your game path probably contains special characters, rename it and try again
-```
-### When i try to set the game path it shows "Cannot start process because a file name has not been provided" or just opens a folder
-```
-You clicked on "Open" at Soulworker tab on settings, to change the game path go to Custom client tab
-```
-### When i click on force patch or play button it shows a "Codepage Fix" error
-```
-You enabled the option to patch the .exe to support unicode languages, this is no longer needed on current clients so don't use it
-```
