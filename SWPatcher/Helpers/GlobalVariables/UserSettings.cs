@@ -238,6 +238,19 @@ namespace SWPatcher.Helpers.GlobalVariables
             }
         }
 
+        internal static bool BypassTranslationDateCheck
+        {
+            get
+            {
+                return Settings.Default.BypassTranslationDateCheck;
+            }
+            set
+            {
+                Settings.Default.BypassTranslationDateCheck = value;
+                Settings.Default.Save();
+            }
+        }
+
         internal static string CustomTranslationServer
         {
             get

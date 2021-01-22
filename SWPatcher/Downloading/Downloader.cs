@@ -58,7 +58,7 @@ namespace SWPatcher.Downloading
         {
             Logger.Debug(Methods.MethodFullName("Downloader", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ToString()));
 
-            if (Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
+            if (UserSettings.BypassTranslationDateCheck || Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
             {
                 SWFileManager.LoadFileConfiguration(this.Language);
             }
