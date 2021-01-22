@@ -302,15 +302,8 @@ namespace SWPatcher.Forms
             }
             catch (Exception e)
             {
-                if (e is FileNotFoundException || e is DirectoryNotFoundException)
-                {
-                    MsgBox.Error("Unable to find LanguagePacks.xml at the specified translations source, change the source and try again.");
-                    return;
-                }
-                else
-                {
-                    throw e;
-                }
+                MsgBox.Error("Unable to find LanguagePacks.xml at the specified translations source, change the source and try again.");
+                return;
             }
 
             XmlElement configRoot = doc.DocumentElement;

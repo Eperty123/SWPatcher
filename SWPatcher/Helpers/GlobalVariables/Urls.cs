@@ -16,6 +16,8 @@
  * along with Soulworker Patcher. If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
+
 namespace SWPatcher.Helpers.GlobalVariables
 {
     internal sealed class Urls
@@ -50,11 +52,7 @@ namespace SWPatcher.Helpers.GlobalVariables
             }
             set
             {
-                CurrentTranslationPath = value;
-                if (!CurrentTranslationPath.EndsWith("/") && !CurrentTranslationPath.EndsWith("\\"))
-                {
-                    CurrentTranslationPath += "/";
-                }
+                CurrentTranslationPath = new UriBuilder(value).Uri.ToString() + "/";
             }
         }
 
