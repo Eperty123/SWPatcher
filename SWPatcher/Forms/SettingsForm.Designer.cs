@@ -531,7 +531,6 @@ namespace SWPatcher.Forms
             //
             // groupBox4
             //
-            this.groupBox4.AutoSize = true;
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.TranslationBypassDateCheckBox);
             this.groupBox4.Controls.Add(this.label1);
@@ -539,7 +538,7 @@ namespace SWPatcher.Forms
             this.groupBox4.Dock     = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(3, 63);
             this.groupBox4.Name     = "groupBox4";
-            this.groupBox4.Size     = new System.Drawing.Size(300, 77);
+            this.groupBox4.Size     = new System.Drawing.Size(300, 101);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop  = false;
 
@@ -578,12 +577,12 @@ namespace SWPatcher.Forms
             //
             // TranslationSourceCheckBox
             //
-            this.TranslationSourceCheckBox.AutoSize                =  true;
-            this.TranslationSourceCheckBox.Location                =  new System.Drawing.Point(6, 25);
-            this.TranslationSourceCheckBox.Name                    =  "TranslationSourceCheckBox";
-            this.TranslationSourceCheckBox.Size                    =  new System.Drawing.Size(15, 14);
-            this.TranslationSourceCheckBox.TabIndex                =  0;
-            this.TranslationSourceCheckBox.UseVisualStyleBackColor =  true;
+            this.TranslationSourceCheckBox.AutoSize                = true;
+            this.TranslationSourceCheckBox.Location                = new System.Drawing.Point(6, 25);
+            this.TranslationSourceCheckBox.Name                    = "TranslationSourceCheckBox";
+            this.TranslationSourceCheckBox.Size                    = new System.Drawing.Size(15, 14);
+            this.TranslationSourceCheckBox.TabIndex                = 0;
+            this.TranslationSourceCheckBox.UseVisualStyleBackColor = true;
 
             //
             // groupBox6
