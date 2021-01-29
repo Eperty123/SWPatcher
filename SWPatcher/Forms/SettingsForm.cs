@@ -55,54 +55,54 @@ namespace SWPatcher.Forms
 
         private void InitializeTextComponent()
         {
-            this.Text = StringLoader.GetText("form_settings");
-            this.ButtonOk.Text = StringLoader.GetText("button_ok");
-            this.ButtonCancel.Text = StringLoader.GetText("button_cancel");
-            this.ButtonApply.Text = StringLoader.GetText("button_apply");
-            this.TabPageGame.Text = StringLoader.GetText("tab_game");
-            this.GroupBoxGameDirectory.Text = StringLoader.GetText("box_game_dir");
-            this.ButtonOpenGameDirectory.Text = StringLoader.GetText("button_open");
-            this.CustomGamePathButton.Text = StringLoader.GetText("button_change");
-            this.ButtonChangePatcherDirectory.Text = StringLoader.GetText("button_change");
-            this.GroupBoxPatchExe.Text = StringLoader.GetText("box_patch_exe");
-            this.CheckBoxPatchExe.Text = StringLoader.GetText("check_patch_exe");
-            this.TabPageCredentials.Text = StringLoader.GetText("tab_credentials");
-            this.GroupBoxGameUserId.Text = StringLoader.GetText("box_id");
-            this.GroupBoxGameUserPassword.Text = StringLoader.GetText("box_pw");
-            this.GroupBoxGameWantLogin.Text = StringLoader.GetText("box_want_login");
-            this.CheckBoxWantToLogin.Text = StringLoader.GetText("check_want_login");
-            this.TabPagePatcher.Text = StringLoader.GetText("tab_patcher");
-            this.GroupBoxPatcherDirectory.Text = StringLoader.GetText("box_patcher_dir");
-            this.GroupBoxUILanguagePicker.Text = StringLoader.GetText("box_language");
-            this.GroupBoxGameOptions.Text = StringLoader.GetText("box_game_options");
-            this.ButtonOpenGameOptions.Text = StringLoader.GetText("button_game_options");
-            this.CustomSourceWarnLabel.Text = "NOTE: The translation source can be a url or a path.\nMake sure it has the correct format, otherwise it won't work.";
+            Text = StringLoader.GetText("form_settings");
+            ButtonOk.Text = StringLoader.GetText("button_ok");
+            ButtonCancel.Text = StringLoader.GetText("button_cancel");
+            ButtonApply.Text = StringLoader.GetText("button_apply");
+            TabPageGame.Text = StringLoader.GetText("tab_game");
+            GroupBoxGameDirectory.Text = StringLoader.GetText("box_game_dir");
+            ButtonOpenGameDirectory.Text = StringLoader.GetText("button_open");
+            CustomGamePathButton.Text = StringLoader.GetText("button_change");
+            ButtonChangePatcherDirectory.Text = StringLoader.GetText("button_change");
+            GroupBoxPatchExe.Text = StringLoader.GetText("box_patch_exe");
+            CheckBoxPatchExe.Text = StringLoader.GetText("check_patch_exe");
+            TabPageCredentials.Text = StringLoader.GetText("tab_credentials");
+            GroupBoxGameUserId.Text = StringLoader.GetText("box_id");
+            GroupBoxGameUserPassword.Text = StringLoader.GetText("box_pw");
+            GroupBoxGameWantLogin.Text = StringLoader.GetText("box_want_login");
+            CheckBoxWantToLogin.Text = StringLoader.GetText("check_want_login");
+            TabPagePatcher.Text = StringLoader.GetText("tab_patcher");
+            GroupBoxPatcherDirectory.Text = StringLoader.GetText("box_patcher_dir");
+            GroupBoxUILanguagePicker.Text = StringLoader.GetText("box_language");
+            GroupBoxGameOptions.Text = StringLoader.GetText("box_game_options");
+            ButtonOpenGameOptions.Text = StringLoader.GetText("button_game_options");
+            CustomSourceWarnLabel.Text = "NOTE: The translation source can be a url or a path.\nMake sure it has the correct format, otherwise it won't work.";
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            this.PendingRestart = false;
-            this.TextBoxGameDirectory.Text = UserSettings.GamePath;// = this.GameClientDirectory = UserSettings.GamePath;
-            this.ServerIpTextBox.Text = UserSettings.CustomGameIp;
-            this.ServerPortTextBox.Text = UserSettings.CustomGamePort;
-            this.CustomGamePathTextBox.Text = UserSettings.CustomGamePath;
-            this.TextBoxPatcherDirectory.Text = this.PatcherWorkingDirectory = UserSettings.PatcherPath;
-            this.CheckBoxPatchExe.Checked = this.WantToPatchSoulworkerExe = UserSettings.WantToPatchExe;
-            this.TextBoxId.Text = this.GameUserId = UserSettings.GameId;
-            this.TextBoxId.Enabled = this.TextBoxPassword.Enabled = this.CheckBoxWantToLogin.Checked = this.WantToLogin = UserSettings.WantToLogin;
-            this.TranslationSourceTextBox.Text = UserSettings.CustomTranslationServer;
-            this.TranslationSourceCheckBox.Checked = UserSettings.UseCustomTranslationServer;
-            this.TranslationBypassDateCheckBox.Checked = UserSettings.BypassTranslationDateCheck;
+            PendingRestart = false;
+            TextBoxGameDirectory.Text = UserSettings.GamePath;// = this.GameClientDirectory = UserSettings.GamePath;
+            ServerIpTextBox.Text = UserSettings.CustomGameIp;
+            ServerPortTextBox.Text = UserSettings.CustomGamePort;
+            CustomGamePathTextBox.Text = UserSettings.CustomGamePath;
+            TextBoxPatcherDirectory.Text = PatcherWorkingDirectory = UserSettings.PatcherPath;
+            CheckBoxPatchExe.Checked = WantToPatchSoulworkerExe = UserSettings.WantToPatchExe;
+            TextBoxId.Text = GameUserId = UserSettings.GameId;
+            TextBoxId.Enabled = TextBoxPassword.Enabled = CheckBoxWantToLogin.Checked = WantToLogin = UserSettings.WantToLogin;
+            TranslationSourceTextBox.Text = UserSettings.CustomTranslationServer;
+            TranslationSourceCheckBox.Checked = UserSettings.UseCustomTranslationServer;
+            TranslationBypassDateCheckBox.Checked = UserSettings.BypassTranslationDateCheck;
 
-            string maskedEmptyString = SHA256String(String.Empty);
+            string maskedEmptyString = SHA256String(string.Empty);
             string maskedGamePw = MaskPassword(UserSettings.GamePw);
             if (maskedEmptyString == maskedGamePw)
             {
-                this.TextBoxPassword.Text = this.GameUserPassword = String.Empty;
+                TextBoxPassword.Text = GameUserPassword = string.Empty;
             }
             else
             {
-                this.TextBoxPassword.Text = this.GameUserPassword = maskedGamePw;
+                TextBoxPassword.Text = GameUserPassword = maskedGamePw;
             }
 
             var def = new ResxLanguage(StringLoader.GetText("match_windows"), "default");
@@ -110,46 +110,46 @@ namespace SWPatcher.Forms
             var ko = new ResxLanguage("한국어", "ko");
             var vi = new ResxLanguage("Tiếng Việt", "vi");
             var ru = new ResxLanguage("Русский", "ru");
-            this.ComboBoxUILanguage.DataSource = new ResxLanguage[] { def, en, ko, vi, ru };
-            string savedCode = this.UILanguage = UserSettings.UILanguageCode;
+            ComboBoxUILanguage.DataSource = new ResxLanguage[] { def, en, ko, vi, ru };
+            string savedCode = UILanguage = UserSettings.UILanguageCode;
             if (en.Code == savedCode)
             {
-                this.ComboBoxUILanguage.SelectedItem = en;
+                ComboBoxUILanguage.SelectedItem = en;
             }
             else if (ko.Code == savedCode)
             {
-                this.ComboBoxUILanguage.SelectedItem = ko;
+                ComboBoxUILanguage.SelectedItem = ko;
             }
             else if (vi.Code == savedCode)
             {
-                this.ComboBoxUILanguage.SelectedItem = vi;
+                ComboBoxUILanguage.SelectedItem = vi;
             }
             else if (ru.Code == savedCode)
             {
-                this.ComboBoxUILanguage.SelectedItem = ru;
+                ComboBoxUILanguage.SelectedItem = ru;
             }
             else
             {
-                this.ComboBoxUILanguage.SelectedItem = def;
+                ComboBoxUILanguage.SelectedItem = def;
             }
 
-            this.TextBoxPatcherDirectory.TextChanged += this.EnableApplyButton;
-            this.CheckBoxPatchExe.CheckedChanged += this.EnableApplyButton;
-            this.TextBoxId.TextChanged += this.EnableApplyButton;
-            this.TextBoxPassword.TextChanged += this.EnableApplyButton;
-            this.CheckBoxWantToLogin.CheckedChanged += this.EnableApplyButton;
-            this.ComboBoxUILanguage.SelectedIndexChanged += this.EnableApplyButton;
-            this.CustomGamePathTextBox.TextChanged += this.EnableApplyButton;
-            this.ServerIpTextBox.TextChanged += this.EnableApplyButton;
-            this.ServerPortTextBox.TextChanged += this.EnableApplyButton;
-            this.TranslationSourceCheckBox.CheckedChanged += this.EnableApplyButton;
-            this.TranslationBypassDateCheckBox.CheckedChanged += this.EnableApplyButton;
-            this.TranslationSourceTextBox.TextChanged += this.EnableApplyButton;
+            TextBoxPatcherDirectory.TextChanged += EnableApplyButton;
+            CheckBoxPatchExe.CheckedChanged += EnableApplyButton;
+            TextBoxId.TextChanged += EnableApplyButton;
+            TextBoxPassword.TextChanged += EnableApplyButton;
+            CheckBoxWantToLogin.CheckedChanged += EnableApplyButton;
+            ComboBoxUILanguage.SelectedIndexChanged += EnableApplyButton;
+            CustomGamePathTextBox.TextChanged += EnableApplyButton;
+            ServerIpTextBox.TextChanged += EnableApplyButton;
+            ServerPortTextBox.TextChanged += EnableApplyButton;
+            TranslationSourceCheckBox.CheckedChanged += EnableApplyButton;
+            TranslationBypassDateCheckBox.CheckedChanged += EnableApplyButton;
+            TranslationSourceTextBox.TextChanged += EnableApplyButton;
         }
 
         private void EnableApplyButton(object sender, EventArgs e)
         {
-            this.ButtonApply.Enabled = true;
+            ButtonApply.Enabled = true;
         }
 
         private void ButtonOpenGameDirectory_Click(object sender, EventArgs e)
@@ -174,7 +174,7 @@ namespace SWPatcher.Forms
                 {
                     if (Methods.IsValidSwPatcherPath(folderDialog.SelectedPath))
                     {
-                        this.TextBoxPatcherDirectory.Text = this.PatcherWorkingDirectory = folderDialog.SelectedPath;
+                        TextBoxPatcherDirectory.Text = PatcherWorkingDirectory = folderDialog.SelectedPath;
                     }
                     else
                     {
@@ -182,7 +182,7 @@ namespace SWPatcher.Forms
 
                         if (dialogResult == DialogResult.Yes)
                         {
-                            this.TextBoxPatcherDirectory.Text = this.PatcherWorkingDirectory = folderDialog.SelectedPath;
+                            TextBoxPatcherDirectory.Text = PatcherWorkingDirectory = folderDialog.SelectedPath;
                         }
                     }
                 }
@@ -191,42 +191,42 @@ namespace SWPatcher.Forms
 
         private void CheckBoxPatchExe_CheckedChanged(object sender, EventArgs e)
         {
-            this.WantToPatchSoulworkerExe = this.CheckBoxPatchExe.Checked;
+            WantToPatchSoulworkerExe = CheckBoxPatchExe.Checked;
         }
 
         private void TextBoxId_TextChanged(object sender, EventArgs e)
         {
-            this.GameUserId = this.TextBoxId.Text;
+            GameUserId = TextBoxId.Text;
         }
 
         private void TextBoxPassword_TextChanged(object sender, EventArgs e)
         {
-            this.GameUserPassword = this.TextBoxPassword.Text;
+            GameUserPassword = TextBoxPassword.Text;
         }
 
         private void CheckBoxWantToLogin_CheckedChanged(object sender, EventArgs e)
         {
-            this.TextBoxId.Enabled = this.TextBoxPassword.Enabled = this.WantToLogin = this.CheckBoxWantToLogin.Checked;
+            TextBoxId.Enabled = TextBoxPassword.Enabled = WantToLogin = CheckBoxWantToLogin.Checked;
         }
 
         private void ComboBoxUILanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.UILanguage = (this.ComboBoxUILanguage.SelectedItem as ResxLanguage).Code;
+            UILanguage = (ComboBoxUILanguage.SelectedItem as ResxLanguage).Code;
         }
 
         private void ButtonOk_Click(object sender, EventArgs e)
         {
-            if (this.ButtonApply.Enabled)
+            if (ButtonApply.Enabled)
             {
-                this.ApplyChanges();
+                ApplyChanges();
             }
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void ButtonApply_Click(object sender, EventArgs e)
         {
-            this.ApplyChanges();
+            ApplyChanges();
         }
 
         private void ButtonOpenGameOptions_Click(object sender, EventArgs e)
@@ -247,94 +247,94 @@ namespace SWPatcher.Forms
         {
             try
             {
-                if (UserSettings.PatcherPath != this.PatcherWorkingDirectory)
+                if (UserSettings.PatcherPath != PatcherWorkingDirectory)
                 {
-                    MoveOldPatcherFolder(UserSettings.PatcherPath, this.PatcherWorkingDirectory, (this.Owner as MainForm).GetTranslationFolders());
+                    MoveOldPatcherFolder(UserSettings.PatcherPath, PatcherWorkingDirectory, (Owner as MainForm).GetTranslationFolders());
 
-                    UserSettings.PatcherPath = this.PatcherWorkingDirectory;
+                    UserSettings.PatcherPath = PatcherWorkingDirectory;
                 }
 
-                if (UserSettings.WantToPatchExe != this.WantToPatchSoulworkerExe)
+                if (UserSettings.WantToPatchExe != WantToPatchSoulworkerExe)
                 {
-                    Region region = (this.Owner as MainForm).GetSelectedRegion();
+                    Region region = (Owner as MainForm).GetSelectedRegion();
                     string gameExePatchedPath = Path.Combine(UserSettings.PatcherPath, region.Folder, Methods.GetGameExeName(region.Id));
                     if (File.Exists(gameExePatchedPath))
                     {
                         File.Delete(gameExePatchedPath);
                     }
 
-                    UserSettings.WantToPatchExe = this.WantToPatchSoulworkerExe;
+                    UserSettings.WantToPatchExe = WantToPatchSoulworkerExe;
                 }
 
-                if (UserSettings.GameId != this.GameUserId)
+                if (UserSettings.GameId != GameUserId)
                 {
-                    UserSettings.GameId = this.GameUserId;
+                    UserSettings.GameId = GameUserId;
                 }
 
-                if (this.GameUserPassword != MaskPassword(UserSettings.GamePw))
+                if (GameUserPassword != MaskPassword(UserSettings.GamePw))
                 {
-                    using (var secure = Methods.ToSecureString(this.GameUserPassword))
+                    using (var secure = Methods.ToSecureString(GameUserPassword))
                     {
                         UserSettings.GamePw = Methods.EncryptString(secure);
                     }
                 }
 
-                if (UserSettings.WantToLogin != this.WantToLogin)
+                if (UserSettings.WantToLogin != WantToLogin)
                 {
-                    UserSettings.WantToLogin = this.WantToLogin;
+                    UserSettings.WantToLogin = WantToLogin;
                 }
 
-                if (UserSettings.UILanguageCode != this.UILanguage)
+                if (UserSettings.UILanguageCode != UILanguage)
                 {
-                    UserSettings.UILanguageCode = this.UILanguage;
-                    this.PendingRestart = true;
+                    UserSettings.UILanguageCode = UILanguage;
+                    PendingRestart = true;
                 }
 
-                if (UserSettings.CustomGamePath != this.CustomGamePath && this.CustomGamePath != null)
+                if (UserSettings.CustomGamePath != CustomGamePath && CustomGamePath != null)
                 {
-                    UserSettings.CustomGamePath = this.CustomGamePath;
-                    if ((this.Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)
+                    UserSettings.CustomGamePath = CustomGamePath;
+                    if ((Owner as MainForm).CurrentState == MainForm.State.RegionNotInstalled)
                     {
-                        (this.Owner as MainForm).CurrentState = MainForm.State.Idle;
+                        (Owner as MainForm).CurrentState = MainForm.State.Idle;
                     }
-                    var region = (this.Owner as MainForm).GetSelectedRegion();
+                    var region = (Owner as MainForm).GetSelectedRegion();
                     if (region != null && region.Id == "jpc")
                     {
-                        this.TextBoxGameDirectory.Text = this.CustomGamePath;
-                        UserSettings.GamePath = this.CustomGamePath;
+                        TextBoxGameDirectory.Text = CustomGamePath;
+                        UserSettings.GamePath = CustomGamePath;
                     }
                 }
 
-                if (UserSettings.CustomGameIp != this.ServerIp)
+                if (UserSettings.CustomGameIp != ServerIp)
                 {
-                    UserSettings.CustomGameIp = this.ServerIp;
+                    UserSettings.CustomGameIp = ServerIp;
                 }
 
-                if (UserSettings.CustomGamePort != this.ServerPort)
+                if (UserSettings.CustomGamePort != ServerPort)
                 {
-                    UserSettings.CustomGamePort = this.ServerPort;
+                    UserSettings.CustomGamePort = ServerPort;
                 }
 
-                if (UserSettings.CustomTranslationServer != this.TranslationSourceTextBox.Text)
+                if (UserSettings.CustomTranslationServer != TranslationSourceTextBox.Text)
                 {
-                    UserSettings.CustomTranslationServer = this.TranslationSourceTextBox.Text;
-                    this.PendingRestart = true;
+                    UserSettings.CustomTranslationServer = TranslationSourceTextBox.Text;
+                    PendingRestart = true;
                 }
 
-                if (UserSettings.UseCustomTranslationServer != this.TranslationSourceCheckBox.Checked)
+                if (UserSettings.UseCustomTranslationServer != TranslationSourceCheckBox.Checked)
                 {
-                    UserSettings.UseCustomTranslationServer = this.TranslationSourceCheckBox.Checked;
-                    this.PendingRestart = true;
+                    UserSettings.UseCustomTranslationServer = TranslationSourceCheckBox.Checked;
+                    PendingRestart = true;
                 }
 
-                if (UserSettings.BypassTranslationDateCheck != this.TranslationBypassDateCheckBox.Checked)
+                if (UserSettings.BypassTranslationDateCheck != TranslationBypassDateCheckBox.Checked)
                 {
-                    UserSettings.BypassTranslationDateCheck = this.TranslationBypassDateCheckBox.Checked;
+                    UserSettings.BypassTranslationDateCheck = TranslationBypassDateCheckBox.Checked;
                 }
 
-                this.ButtonApply.Enabled = false;
+                ButtonApply.Enabled = false;
 
-                if (this.PendingRestart)
+                if (PendingRestart)
                 {
                     MsgBox.Notice(StringLoader.GetText("notice_pending_restart"));
                 }
@@ -431,7 +431,7 @@ namespace SWPatcher.Forms
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void CustomGamePathButton_Click_1(object sender, EventArgs e)
@@ -447,29 +447,29 @@ namespace SWPatcher.Forms
                     return;
                 }
                 CustomGamePathTextBox.Text = fbd.SelectedPath;
-                this.CustomGamePath = fbd.SelectedPath;
+                CustomGamePath = fbd.SelectedPath;
                 if (!ButtonApply.Enabled) ButtonApply.Enabled = true;
             }
         }
 
         private void ServerIpTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.ServerIp = ServerIpTextBox.Text;
+            ServerIp = ServerIpTextBox.Text;
         }
 
         private void ServerPortTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.ServerPort = ServerPortTextBox.Text;
+            ServerPort = ServerPortTextBox.Text;
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            this.TranslationSourceCheckBox.Checked = !this.TranslationSourceCheckBox.Checked;
+            TranslationSourceCheckBox.Checked = !TranslationSourceCheckBox.Checked;
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-            this.TranslationBypassDateCheckBox.Checked = !this.TranslationBypassDateCheckBox.Checked;
+            TranslationBypassDateCheckBox.Checked = !TranslationBypassDateCheckBox.Checked;
         }
     }
 }

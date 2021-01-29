@@ -23,7 +23,7 @@ namespace SWPatcher.Helpers.GlobalVariables
     internal sealed class Urls
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
-        internal const string ForkWebsite = "https://github.com/Asaduji/SWPatcher";
+        internal const string ForkWebsite = "https://github.com/Eperty123/SWPatcher";
         internal const string ForkGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/";
         /*
 #if DEBUG

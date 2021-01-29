@@ -69,15 +69,15 @@ namespace SWPatcher.General
                 string pathD = section.Keys[Strings.IniName.Pack.KeyPathOfDownload].Value;
                 string format = section.Keys[Strings.IniName.Pack.KeyFormat].Value;
 
-                if (format != String.Empty)
+                if (format != string.Empty)
                 {
                     SWFiles.Add(new PatchedSWFile(name, path, pathD, pathA, format));
                 }
-                else if (pathA != String.Empty)
+                else if (pathA != string.Empty)
                 {
                     if (pathA == Strings.IniName.Pack.KeyBaseValue)
                     {
-                        pathA = String.Empty;
+                        pathA = string.Empty;
                     }
 
                     SWFiles.Add(new ArchivedSWFile(name, path, pathD, pathA));

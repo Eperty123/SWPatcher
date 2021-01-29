@@ -29,10 +29,10 @@ namespace SWPatcher.RTPatch
 
         internal RTPatcherProgressChangedEventArgs(int fileNumber, int fileCount, string fileName, int progress)
         {
-            this.FileNumber = fileNumber;
-            this.FileCount = fileCount;
-            this.FileName = fileName;
-            this.Progress = progress;
+            FileNumber = fileNumber;
+            FileCount = fileCount;
+            FileName = fileName;
+            Progress = progress;
         }
     }
 }

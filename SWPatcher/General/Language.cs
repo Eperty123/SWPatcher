@@ -28,45 +28,45 @@ namespace SWPatcher.General
         internal DateTime LastUpdate { get; }
         internal string ApplyingRegionId { get; }
         internal string ApplyingRegionFolder { get; }
-        internal string Path => System.IO.Path.Combine(this.ApplyingRegionFolder, this.Name);
-        internal string BackupPath => System.IO.Path.Combine(this.ApplyingRegionFolder, Strings.FolderName.Backup);
+        internal string Path => System.IO.Path.Combine(ApplyingRegionFolder, Name);
+        internal string BackupPath => System.IO.Path.Combine(ApplyingRegionFolder, Strings.FolderName.Backup);
 
         internal Language(string id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         private Language(string id, string name, string applyingRegionId, string applyingRegionFolder) : this(id)
         {
-            this.Name = name;
-            this.ApplyingRegionId = applyingRegionId;
-            this.ApplyingRegionFolder = applyingRegionFolder;
+            Name = name;
+            ApplyingRegionId = applyingRegionId;
+            ApplyingRegionFolder = applyingRegionFolder;
         }
 
         internal Language(string id, string name, DateTime lastUpdate, string applyingRegionId, string applyingRegionFolder) : this(id, name, applyingRegionId, applyingRegionFolder)
         {
-            this.LastUpdate = lastUpdate;
+            LastUpdate = lastUpdate;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
 
             var language = obj as Language;
-            return this.Id == language.Id;
+            return Id == language.Id;
         }
 
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

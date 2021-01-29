@@ -63,202 +63,202 @@ namespace SWPatcher.Forms
         {
             get
             {
-                return this._state;
+                return _state;
             }
             set
             {
-                if (this._state != value)
+                if (_state != value)
                 {
                     switch (value)
                     {
                         case State.Idle:
-                            this.ComboBoxLanguages.Enabled = true;
-                            this.ComboBoxRegions.Enabled = true;
-                            this.ButtonDownload.Enabled = true;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-                            this.ButtonPlay.Enabled = true;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = true;
-                            this.ForceToolStripMenuItem.Enabled = true;
-                            this.RefreshToolStripMenuItem.Enabled = true;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_idle");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = true;
+                            ComboBoxRegions.Enabled = true;
+                            ButtonDownload.Enabled = true;
+                            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+                            ButtonPlay.Enabled = true;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = true;
+                            ForceToolStripMenuItem.Enabled = true;
+                            RefreshToolStripMenuItem.Enabled = true;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_idle");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
 
                         case State.Download:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = true;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_cancel");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_download");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = true;
+                            ButtonDownload.Text = StringLoader.GetText("button_cancel");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_download");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
 
                         case State.Patch:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = true;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_cancel");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_patch");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = true;
+                            ButtonDownload.Text = StringLoader.GetText("button_cancel");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_patch");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
 
                         case State.Prepare:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = false;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_prepare");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = false;
+                            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_prepare");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                             break;
 
                         case State.WaitClient:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = false;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-                            this.ButtonPlay.Enabled = true;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_cancel");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_wait_client");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = false;
+                            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+                            ButtonPlay.Enabled = true;
+                            ButtonPlay.Text = StringLoader.GetText("button_cancel");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_wait_client");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
 
                         case State.WaitClose:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = false;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_wait_close");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
-                            this.WindowState = FormWindowState.Minimized;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = false;
+                            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_wait_close");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                            WindowState = FormWindowState.Minimized;
 
                             break;
 
                         case State.RTPatch:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ComboBoxRegions.Enabled = false;
-                            this.ButtonDownload.Enabled = true;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_cancel");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_update_client");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = false;
+                            ComboBoxRegions.Enabled = false;
+                            ButtonDownload.Enabled = true;
+                            ButtonDownload.Text = StringLoader.GetText("button_cancel");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_update_client");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
 
                         case State.RegionNotInstalled:
-                            this.ComboBoxLanguages.Enabled = false;
-                            this.ButtonDownload.Enabled = false;
-                            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-                            this.ButtonPlay.Enabled = false;
-                            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-                            this.ToolStripMenuItemStartRaw.Enabled = false;
-                            this.ForceToolStripMenuItem.Enabled = false;
-                            this.RefreshToolStripMenuItem.Enabled = false;
-                            this.ToolStripStatusLabel.Text = StringLoader.GetText("form_status_idle");
-                            this.ToolStripProgressBar.Value = this.ToolStripProgressBar.Minimum;
-                            this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                            ComboBoxLanguages.Enabled = false;
+                            ButtonDownload.Enabled = false;
+                            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+                            ButtonPlay.Enabled = false;
+                            ButtonPlay.Text = StringLoader.GetText("button_play");
+                            ToolStripMenuItemStartRaw.Enabled = false;
+                            ForceToolStripMenuItem.Enabled = false;
+                            RefreshToolStripMenuItem.Enabled = false;
+                            ToolStripStatusLabel.Text = StringLoader.GetText("form_status_idle");
+                            ToolStripProgressBar.Value = ToolStripProgressBar.Minimum;
+                            ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
 
                             break;
                     }
 
                     Logger.Info($"State=[{value}]");
-                    this.ComboBoxLanguages_SelectionChangeCommitted(this, EventArgs.Empty);
-                    this._state = value;
+                    ComboBoxLanguages_SelectionChangeCommitted(this, EventArgs.Empty);
+                    _state = value;
                 }
             }
         }
 
         internal MainForm()
         {
-            this.Downloader = new Downloader();
-            this.Downloader.DownloaderProgressChanged += this.Downloader_DownloaderProgressChanged;
-            this.Downloader.DownloaderCompleted += this.Downloader_DownloaderCompleted;
+            Downloader = new Downloader();
+            Downloader.DownloaderProgressChanged += Downloader_DownloaderProgressChanged;
+            Downloader.DownloaderCompleted += Downloader_DownloaderCompleted;
 
-            this.Patcher = new Patcher();
-            this.Patcher.PatcherProgressChanged += this.Patcher_PatcherProgressChanged;
-            this.Patcher.PatcherCompleted += this.Patcher_PatcherCompleted;
+            Patcher = new Patcher();
+            Patcher.PatcherProgressChanged += Patcher_PatcherProgressChanged;
+            Patcher.PatcherCompleted += Patcher_PatcherCompleted;
 
-            this.RTPatcher = new RTPatcher();
-            this.RTPatcher.RTPatcherDownloadProgressChanged += this.RTPatcher_DownloadProgressChanged;
-            this.RTPatcher.RTPatcherProgressChanged += this.RTPatcher_ProgressChanged;
-            this.RTPatcher.RTPatcherCompleted += this.RTPatcher_Completed;
+            RTPatcher = new RTPatcher();
+            RTPatcher.RTPatcherDownloadProgressChanged += RTPatcher_DownloadProgressChanged;
+            RTPatcher.RTPatcherProgressChanged += RTPatcher_ProgressChanged;
+            RTPatcher.RTPatcherCompleted += RTPatcher_Completed;
 
-            this.GameStarter = new GameStarter();
-            this.GameStarter.GameStarterProgressChanged += this.GameStarter_GameStarterProgressChanged;
-            this.GameStarter.GameStarterCompleted += this.GameStarter_GameStarterCompleted;
+            GameStarter = new GameStarter();
+            GameStarter.GameStarterProgressChanged += GameStarter_GameStarterProgressChanged;
+            GameStarter.GameStarterCompleted += GameStarter_GameStarterCompleted;
 
             InitializeComponent();
             InitializeTextComponent();
 
-            Logger.Info($"[{this.Text}] starting in UI Language [{UserSettings.UILanguageCode}]; Patcher Folder [{UserSettings.PatcherPath}]");
+            Logger.Info($"[{Text}] starting in UI Language [{UserSettings.UILanguageCode}]; Patcher Folder [{UserSettings.PatcherPath}]");
         }
 
         private void InitializeTextComponent()
         {
-            this.MenuToolStripMenuItem.Text = StringLoader.GetText("form_menu");
-            this.ForceToolStripMenuItem.Text = StringLoader.GetText("form_force_patch");
-            this.OpenSWWebpageToolStripMenuItem.Text = StringLoader.GetText("form_open_sw_webpage");
-            this.UploadLogToPastebinToolStripMenuItem.Text = StringLoader.GetText("form_upload_log");
-            this.SettingsToolStripMenuItem.Text = StringLoader.GetText("form_settings");
-            this.RefreshToolStripMenuItem.Text = StringLoader.GetText("form_refresh");
-            this.AboutToolStripMenuItem.Text = StringLoader.GetText("form_about");
-            this.LabelRegionPick.Text = StringLoader.GetText("form_region_pick");
-            this.LabelLanguagePick.Text = StringLoader.GetText("form_language_pick");
-            this.ButtonDownload.Text = StringLoader.GetText("button_download_translation");
-            this.ButtonPlay.Text = StringLoader.GetText("button_play");
-            this.ButtonExit.Text = StringLoader.GetText("button_exit");
-            this.NotifyIcon.BalloonTipText = StringLoader.GetText("notify_balloon_text");
-            this.NotifyIcon.BalloonTipTitle = StringLoader.GetText("notify_balloon_title");
-            this.NotifyIcon.Text = StringLoader.GetText("notify_text");
-            this.ToolStripMenuItemStartRaw.Text = StringLoader.GetText("button_play_raw");
-            this.Text = AssemblyAccessor.Title + " " + AssemblyAccessor.Version;
+            MenuToolStripMenuItem.Text = StringLoader.GetText("form_menu");
+            ForceToolStripMenuItem.Text = StringLoader.GetText("form_force_patch");
+            OpenSWWebpageToolStripMenuItem.Text = StringLoader.GetText("form_open_sw_webpage");
+            UploadLogToPastebinToolStripMenuItem.Text = StringLoader.GetText("form_upload_log");
+            SettingsToolStripMenuItem.Text = StringLoader.GetText("form_settings");
+            RefreshToolStripMenuItem.Text = StringLoader.GetText("form_refresh");
+            AboutToolStripMenuItem.Text = StringLoader.GetText("form_about");
+            LabelRegionPick.Text = StringLoader.GetText("form_region_pick");
+            LabelLanguagePick.Text = StringLoader.GetText("form_language_pick");
+            ButtonDownload.Text = StringLoader.GetText("button_download_translation");
+            ButtonPlay.Text = StringLoader.GetText("button_play");
+            ButtonExit.Text = StringLoader.GetText("button_exit");
+            NotifyIcon.BalloonTipText = StringLoader.GetText("notify_balloon_text");
+            NotifyIcon.BalloonTipTitle = StringLoader.GetText("notify_balloon_title");
+            NotifyIcon.Text = StringLoader.GetText("notify_text");
+            ToolStripMenuItemStartRaw.Text = StringLoader.GetText("button_play_raw");
+            Text = AssemblyAccessor.Title + " " + AssemblyAccessor.Version;
         }
 
         private void Downloader_DownloaderProgressChanged(object sender, DownloaderProgressChangedEventArgs e)
         {
-            if (this.CurrentState == State.Download)
+            if (CurrentState == State.Download)
             {
-                this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_download")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
-                this.ToolStripProgressBar.Value = e.Progress;
+                ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_download")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
+                ToolStripProgressBar.Value = e.Progress;
             }
         }
 
@@ -276,46 +276,46 @@ namespace SWPatcher.Forms
             else
             {
                 Logger.Debug($"{sender.ToString()} successfuly completed");
-                this.CurrentState = State.Patch;
-                this.Patcher.Run(e.Language);
+                CurrentState = State.Patch;
+                Patcher.Run(e.Language);
 
                 return;
             }
 
-            this.CurrentState = State.Idle;
+            CurrentState = State.Idle;
         }
 
         private void Patcher_PatcherProgressChanged(object sender, PatcherProgressChangedEventArgs e)
         {
-            if (this.CurrentState == State.Patch)
+            if (CurrentState == State.Patch)
             {
                 switch (e.PatcherState)
                 {
                     case Patcher.State.Load:
-                        this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_load")}";
-                        this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                        ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_load")}";
+                        ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                         break;
 
                     case Patcher.State.Patch:
-                        this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_patch")}";
-                        this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                        ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_patch")}";
+                        ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
                         if (e.Progress != -1)
                         {
-                            this.ToolStripProgressBar.Value = e.Progress;
+                            ToolStripProgressBar.Value = e.Progress;
                         }
 
                         break;
 
                     case Patcher.State.Save:
-                        this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_save")}";
-                        this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                        ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_save")}";
+                        ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                         break;
 
                     case Patcher.State.ExePatch:
-                        this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_exe")}";
-                        this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                        ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_patch")} {StringLoader.GetText("form_status_patch_exe")}";
+                        ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
 
                         break;
                 }
@@ -360,40 +360,40 @@ namespace SWPatcher.Forms
 
             SWFileManager.DisposeFileData();
             GC.Collect();
-            this.CurrentState = State.Idle;
+            CurrentState = State.Idle;
         }
 
         private void RTPatcher_DownloadProgressChanged(object sender, RTPatcherDownloadProgressChangedEventArgs e)
         {
-            if (this.CurrentState == State.RTPatch)
+            if (CurrentState == State.RTPatch)
             {
                 if (e.Progress == -1)
                 {
-                    this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_prepare")} {e.FileName}";
-                    this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                    ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_prepare")} {e.FileName}";
+                    ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
                 }
                 else
                 {
-                    this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_update_client")} {e.FileName} - {e.DownloadSpeed}";
-                    this.ToolStripProgressBar.Value = e.Progress;
+                    ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_update_client")} {e.FileName} - {e.DownloadSpeed}";
+                    ToolStripProgressBar.Value = e.Progress;
                 }
             }
         }
 
         private void RTPatcher_ProgressChanged(object sender, RTPatcherProgressChangedEventArgs e)
         {
-            if (this.CurrentState == State.RTPatch)
+            if (CurrentState == State.RTPatch)
             {
                 if (e.Progress == -1)
                 {
-                    this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_prepare")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
-                    this.ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                    ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_prepare")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
+                    ToolStripProgressBar.Style = ProgressBarStyle.Marquee;
                 }
                 else
                 {
-                    this.ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_update_client")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
-                    this.ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
-                    this.ToolStripProgressBar.Value = e.Progress;
+                    ToolStripStatusLabel.Text = $"{StringLoader.GetText("form_status_update_client")} {e.FileName} ({e.FileNumber}/{e.FileCount})";
+                    ToolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                    ToolStripProgressBar.Value = e.Progress;
                 }
             }
         }
@@ -497,35 +497,35 @@ namespace SWPatcher.Forms
             {
                 Methods.RTPatchCleanup(true);
                 Logger.Debug($"{sender.ToString()} successfuly completed");
-                switch (this._nextState)
+                switch (_nextState)
                 {
                     case NextState.Download:
-                        this.CurrentState = State.Download;
-                        this.Downloader.Run(e.Language);
+                        CurrentState = State.Download;
+                        Downloader.Run(e.Language);
 
                         break;
 
                     case NextState.Play:
-                        this.GameStarter.Run(e.Language, true);
+                        GameStarter.Run(e.Language, true);
 
                         break;
 
                     case NextState.PlayRaw:
-                        this.GameStarter.Run(e.Language, false);
+                        GameStarter.Run(e.Language, false);
 
                         break;
                 }
 
-                this._nextState = 0;
+                _nextState = 0;
                 return;
             }
 
-            this.CurrentState = State.Idle;
+            CurrentState = State.Idle;
         }
 
         private void GameStarter_GameStarterProgressChanged(object sender, GameStarterProgressChangedEventArgs e)
         {
-            this.CurrentState = e.State;
+            CurrentState = e.State;
         }
 
         private void GameStarter_GameStarterCompleted(object sender, GameStarterCompletedEventArgs e)
@@ -544,16 +544,16 @@ namespace SWPatcher.Forms
                 MsgBox.Notice(StringLoader.GetText("notice_outdated_translation"));
                 ResetTranslation(e.Language);
 
-                this.CurrentState = State.RTPatch;
-                this._nextState = NextState.Download;
-                this.RTPatcher.Run(e.Language);
+                CurrentState = State.RTPatch;
+                _nextState = NextState.Download;
+                RTPatcher.Run(e.Language);
 
                 return;
             }
             else
             {
                 Logger.Debug($"{sender.ToString()} successfuly completed");
-                this.RestoreFromTray();
+                RestoreFromTray();
             }
 
             try
@@ -562,7 +562,7 @@ namespace SWPatcher.Forms
             }
             finally
             {
-                this.CurrentState = State.Idle;
+                CurrentState = State.Idle;
             }
         }
     }

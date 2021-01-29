@@ -30,17 +30,17 @@ namespace SWPatcher.Launching
 
         internal GameStarterCompletedEventArgs(bool cancelled, Exception error, Language language)
         {
-            this.Cancelled = cancelled;
-            this.Error = error;
-            this.Language = language;
+            Cancelled = cancelled;
+            Error = error;
+            Language = language;
         }
 
         internal GameStarterCompletedEventArgs(bool cancelled, Exception error, Language language, bool needsForcePatch)
         {
-            this.Cancelled = cancelled;
-            this.Error = error;
-            this.Language = language;
-            this.NeedsForcePatch = needsForcePatch;
+            Cancelled = cancelled;
+            Error = error;
+            Language = language;
+            NeedsForcePatch = needsForcePatch;
         }
     }
 }

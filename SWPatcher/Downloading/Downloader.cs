@@ -39,15 +39,15 @@ namespace SWPatcher.Downloading
 
         internal Downloader()
         {
-            this.Worker = new BackgroundWorker
+            Worker = new BackgroundWorker
             {
                 WorkerSupportsCancellation = true
             };
-            this.Worker.DoWork += this.Worker_DoWork;
-            this.Worker.RunWorkerCompleted += this.Worker_RunWorkerCompleted;
-            this.Client = new WebClient();
-            this.Client.DownloadProgressChanged += this.Client_DownloadProgressChanged;
-            this.Client.DownloadDataCompleted += this.Client_DownloadDataCompleted;
+            Worker.DoWork += Worker_DoWork;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            Client = new WebClient();
+            Client.DownloadProgressChanged += Client_DownloadProgressChanged;
+            Client.DownloadDataCompleted += Client_DownloadDataCompleted;
         }
 
         internal event DownloaderProgressChangedEventHandler DownloaderProgressChanged;
@@ -56,40 +56,41 @@ namespace SWPatcher.Downloading
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Logger.Debug(Methods.MethodFullName("Downloader", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ToString()));
+            Logger.Debug(Methods.MethodFullName("Downloader", Thread.CurrentThread.ManagedThreadId.ToString(), Language.ToString()));
+            SWFileManager.LoadFileConfiguration(Language);
 
-            if (UserSettings.BypassTranslationDateCheck || Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
-            {
-                SWFileManager.LoadFileConfiguration(this.Language);
-            }
-            else
-            {
-                throw new Exception(StringLoader.GetText("exception_already_latest_translation", Methods.DateToLocalString(this.Language.LastUpdate)));
-            }
+            //if (UserSettings.BypassTranslationDateCheck || Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
+            //{
+            //    SWFileManager.LoadFileConfiguration(this.Language);
+            //}
+            //else
+            //{
+            //    throw new Exception(StringLoader.GetText("exception_already_latest_translation", Methods.DateToLocalString(this.Language.LastUpdate)));
+            //}
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled || e.Error != null)
             {
-                this.DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(e.Cancelled, e.Error));
+                DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(e.Cancelled, e.Error));
             }
             else
             {
-                this.DownloadNext(0);
+                DownloadNext(0);
             }
         }
 
         private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.DownloaderProgressChanged?.Invoke(sender, new DownloaderProgressChangedEventArgs((int)e.UserState + 1, SWFileManager.Count, Path.GetFileNameWithoutExtension(SWFileManager.GetElementAt((int)e.UserState).Name), e));
+            DownloaderProgressChanged?.Invoke(sender, new DownloaderProgressChangedEventArgs((int)e.UserState + 1, SWFileManager.Count, Path.GetFileNameWithoutExtension(SWFileManager.GetElementAt((int)e.UserState).Name), e));
         }
 
         private void Client_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
             if (e.Cancelled || e.Error != null)
             {
-                this.DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(e.Cancelled, e.Error));
+                DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(e.Cancelled, e.Error));
             }
             else
             {
@@ -101,7 +102,7 @@ namespace SWPatcher.Downloading
                 }
                 else
                 {
-                    string swFilePath = Path.Combine(this.Language.Path, swFile.Path, Path.GetFileName(swFile.PathD));
+                    string swFilePath = Path.Combine(Language.Path, swFile.Path, Path.GetFileName(swFile.PathD));
                     string swFileDirectory = Path.GetDirectoryName(swFilePath);
 
                     Directory.CreateDirectory(swFileDirectory);
@@ -110,11 +111,11 @@ namespace SWPatcher.Downloading
 
                 if (SWFileManager.Count > ++index)
                 {
-                    this.DownloadNext(index);
+                    DownloadNext(index);
                 }
                 else
                 {
-                    this.DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(this.Language, e.Cancelled, e.Error));
+                    DownloaderCompleted?.Invoke(sender, new DownloaderCompletedEventArgs(Language, e.Cancelled, e.Error));
                 }
             }
         }
@@ -123,26 +124,26 @@ namespace SWPatcher.Downloading
         {
             string pathname = Language.Path.StartsWith("jpc") ? "jp" + Language.Path.Substring(3) : Language.Path;
             Uri uri = new Uri(Urls.TranslationGitHubHome + pathname + '/' + SWFileManager.GetElementAt(index).PathD);
-            this.Client.DownloadDataAsync(uri, index);
+            Client.DownloadDataAsync(uri, index);
 
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), uri.AbsoluteUri));
         }
 
         internal void Cancel()
         {
-            this.Worker.CancelAsync();
-            this.Client.CancelAsync();
+            Worker.CancelAsync();
+            Client.CancelAsync();
         }
 
         internal void Run(Language language)
         {
-            if (this.Worker.IsBusy || this.Client.IsBusy)
+            if (Worker.IsBusy || Client.IsBusy)
             {
                 return;
             }
 
-            this.Language = language;
-            this.Worker.RunWorkerAsync();
+            Language = language;
+            Worker.RunWorkerAsync();
         }
     }
 }

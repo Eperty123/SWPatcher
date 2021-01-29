@@ -58,30 +58,30 @@ namespace SWPatcher.Patching
         {
             get
             {
-                return this._state;
+                return _state;
             }
             private set
             {
                 Logger.Info($"State=[{value}]");
                 if (value != State.Idle)
                 {
-                    this.Worker.ReportProgress(-1);
+                    Worker.ReportProgress(-1);
                 }
 
-                this._state = value;
+                _state = value;
             }
         }
 
         internal Patcher()
         {
-            this.Worker = new BackgroundWorker
+            Worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            this.Worker.DoWork += this.Worker_DoWork;
-            this.Worker.ProgressChanged += this.Worker_ProgressChanged;
-            this.Worker.RunWorkerCompleted += this.Worker_RunWorkerCompleted;
+            Worker.DoWork += Worker_DoWork;
+            Worker.ProgressChanged += Worker_ProgressChanged;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         }
 
         internal event PatcherProgressChangedEventHandler PatcherProgressChanged;
@@ -90,15 +90,15 @@ namespace SWPatcher.Patching
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Logger.Debug(Methods.MethodFullName("Patcher", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ToString()));
+            Logger.Debug(Methods.MethodFullName("Patcher", Thread.CurrentThread.ManagedThreadId.ToString(), Language.ToString()));
 
-            this.CurrentState = State.Load;
+            CurrentState = State.Load;
             IEnumerable<ArchivedSWFile> archivedSWFiles = SWFileManager.GetFiles().OfType<ArchivedSWFile>();
-            string regionFldr = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
+            string regionFldr = Language.ApplyingRegionFolder == "jpc" ? "jp" : Language.ApplyingRegionFolder;
             string datasArchivesPath;
 
             //Looks like data12 password changed, i'll change this later to something less dirty
-            if (this.Language.ApplyingRegionFolder != "jpc" || UserSettings.UseCustomTranslationServer)
+            if (Language.ApplyingRegionFolder != "jpc" || UserSettings.UseCustomTranslationServer)
             {
                 datasArchivesPath = Urls.TranslationGitHubHome + regionFldr + '/' + Strings.IniName.DatasArchives;
             }
@@ -119,16 +119,16 @@ namespace SWPatcher.Patching
                 return ZipFile.Read(xms);
             });
 
-            this.CurrentState = State.Patch;
+            CurrentState = State.Patch;
             int count = 1;
             foreach (ArchivedSWFile archivedSWFile in archivedSWFiles)
             {
-                if (this.Worker.CancellationPending)
+                if (Worker.CancellationPending)
                 {
                     e.Cancel = true;
                     return;
                 }
-                this.Worker.ReportProgress(count++ == archivedSWFilesCount ? int.MaxValue : Convert.ToInt32(((double)count / archivedSWFilesCount) * int.MaxValue));
+                Worker.ReportProgress(count++ == archivedSWFilesCount ? int.MaxValue : Convert.ToInt32(((double)count / archivedSWFilesCount) * int.MaxValue));
 
                 string archiveFileNameWithoutExtension = Path.GetFileNameWithoutExtension(archivedSWFile.Path);
                 string archivePassword = null;
@@ -166,7 +166,7 @@ namespace SWPatcher.Patching
                         }
                     }
 
-                    Dictionary<ulong, string[]> inputTable = this.ReadInputFile(patchedSWFile.Data, lineCount, idIndex);
+                    Dictionary<ulong, string[]> inputTable = ReadInputFile(patchedSWFile.Data, lineCount, idIndex);
 
                     using (var br = new BinaryReader(ms))
                     using (var bw = new BinaryWriter(msDest, new UTF8Encoding(false, true), true))
@@ -197,7 +197,7 @@ namespace SWPatcher.Patching
 
                         for (ulong i = 0; i < dataCount; i++)
                         {
-                            if (this.Worker.CancellationPending)
+                            if (Worker.CancellationPending)
                             {
                                 e.Cancel = true;
                                 break;
@@ -208,7 +208,7 @@ namespace SWPatcher.Patching
                             object[] current = new object[formatArray.Length];
                             for (int j = 0; j < formatArray.Length; j++)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     break;
@@ -272,7 +272,7 @@ namespace SWPatcher.Patching
                             int lenPosition = 0;
                             for (int j = 0; j < formatArray.Length; j++)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     break;
@@ -372,10 +372,10 @@ namespace SWPatcher.Patching
                 }
             }
 
-            this.CurrentState = State.Save;
+            CurrentState = State.Save;
             foreach (KeyValuePair<string, ZipFile> archive in archives)
             {
-                if (this.Worker.CancellationPending)
+                if (Worker.CancellationPending)
                 {
                     e.Cancel = true;
                     return;
@@ -383,7 +383,7 @@ namespace SWPatcher.Patching
 
                 string zipFileName = archive.Key;
                 ZipFile zipFile = archive.Value;
-                string archivePath = Path.Combine(this.Language.Path, zipFileName);
+                string archivePath = Path.Combine(Language.Path, zipFileName);
                 string archivePathDirectory = Path.GetDirectoryName(archivePath);
 
                 Directory.CreateDirectory(archivePathDirectory);
@@ -428,12 +428,12 @@ namespace SWPatcher.Patching
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.PatcherProgressChanged?.Invoke(sender, new PatcherProgressChangedEventArgs(this.CurrentState, e.ProgressPercentage));
+            PatcherProgressChanged?.Invoke(sender, new PatcherProgressChangedEventArgs(CurrentState, e.ProgressPercentage));
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.PatcherCompleted?.Invoke(sender, new PatcherCompletedEventArgs(this.Language, e.Cancelled, e.Error));
+            PatcherCompleted?.Invoke(sender, new PatcherCompletedEventArgs(Language, e.Cancelled, e.Error));
         }
 
         private Dictionary<ulong, string[]> ReadInputFile(byte[] fileBytes, int lineCount, int idIndex)
@@ -519,18 +519,18 @@ namespace SWPatcher.Patching
 
         internal void Cancel()
         {
-            this.Worker.CancelAsync();
+            Worker.CancelAsync();
         }
 
         internal void Run(Language language)
         {
-            if (this.Worker.IsBusy)
+            if (Worker.IsBusy)
             {
                 return;
             }
 
-            this.Language = language;
-            this.Worker.RunWorkerAsync();
+            Language = language;
+            Worker.RunWorkerAsync();
         }
     }
 }

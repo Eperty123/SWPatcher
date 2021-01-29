@@ -34,11 +34,11 @@ namespace SWPatcher.Forms
     {
         internal void RestoreFromTray()
         {
-            this.WindowState = FormWindowState.Normal;
-            this.ShowInTaskbar = true;
-            this.Show();
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            Show();
 
-            this.NotifyIcon.Visible = false;
+            NotifyIcon.Visible = false;
         }
 
         private static void StartupBackupCheck(Language language)
@@ -154,7 +154,7 @@ namespace SWPatcher.Forms
             {
                 string value = Methods.GetRegistryValue(Strings.Registry.JP.RegistryKey, Strings.Registry.JP.Key64Path, Strings.Registry.JP.FolderName);
 
-                if (value != String.Empty)
+                if (value != string.Empty)
                 {
                     return value;
                 }
@@ -190,7 +190,7 @@ namespace SWPatcher.Forms
         {
             const string SteamGameId = "630100";
             string steamInstallPath;
-            string swPath = String.Empty;
+            string swPath = string.Empty;
             if (!Environment.Is64BitOperatingSystem)
             {
                 steamInstallPath = Methods.GetRegistryValue(Strings.Registry.Steam.RegistryKey, Strings.Registry.Steam.Key32Path, Strings.Registry.Steam.InstallPath);
@@ -199,13 +199,13 @@ namespace SWPatcher.Forms
             {
                 steamInstallPath = Methods.GetRegistryValue(Strings.Registry.Steam.RegistryKey, Strings.Registry.Steam.Key64Path, Strings.Registry.Steam.InstallPath);
 
-                if (steamInstallPath == String.Empty)
+                if (steamInstallPath == string.Empty)
                 {
                     steamInstallPath = Methods.GetRegistryValue(Strings.Registry.Steam.RegistryKey, Strings.Registry.Steam.Key32Path, Strings.Registry.Steam.InstallPath);
                 }
             }
 
-            if (steamInstallPath != String.Empty)
+            if (steamInstallPath != string.Empty)
             {
                 List<string> libraryPaths = new List<string>();
                 string mainSteamLibrary = Path.Combine(steamInstallPath, "steamapps");
@@ -242,7 +242,7 @@ namespace SWPatcher.Forms
                 }
             }
 
-            if (swPath == String.Empty)
+            if (swPath == string.Empty)
             {
                 swPath = GetGameforgeLauncherSwPath();
             }
@@ -261,15 +261,15 @@ namespace SWPatcher.Forms
             {
                 gameforgeInstallPath = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Key64Path, Strings.Registry.Gameforge.InstallPath);
 
-                if (gameforgeInstallPath == String.Empty)
+                if (gameforgeInstallPath == string.Empty)
                 {
                     gameforgeInstallPath = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Key32Path, Strings.Registry.Gameforge.InstallPath);
                 }
             }
 
-            if (gameforgeInstallPath == String.Empty)
+            if (gameforgeInstallPath == string.Empty)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             return Path.Combine(gameforgeInstallPath, "Client");
@@ -278,7 +278,7 @@ namespace SWPatcher.Forms
         internal void ResetTranslation(Language language)
         {
             DeleteTranslationIni(language);
-            this.LabelNewTranslations.Text = StringLoader.GetText("form_label_new_translation", language.ToString(), Methods.DateToLocalString(language.LastUpdate));
+            LabelNewTranslations.Text = StringLoader.GetText("form_label_new_translation", language.ToString(), Methods.DateToLocalString(language.LastUpdate));
         }
 
         private static void DeleteTranslationIni(Language language)
@@ -321,12 +321,12 @@ namespace SWPatcher.Forms
                 string regionFolder = regionNode.Attributes[Strings.Xml.Attributes.Folder]?.Value;
                 string languagesLinkId = regionNode.Attributes[Strings.Xml.Attributes.LanguagesLinkId]?.Value;
 
-                if (String.IsNullOrWhiteSpace(regionFolder))
+                if (string.IsNullOrWhiteSpace(regionFolder))
                 {
                     regionFolder = regionId;
                 }
 
-                if (String.IsNullOrWhiteSpace(languagesLinkId))
+                if (string.IsNullOrWhiteSpace(languagesLinkId))
                 {
                     XmlElement xmlLanguages = regionNode[Strings.Xml.Languages];
                     int languageCount = xmlLanguages.ChildNodes.Count;
@@ -380,29 +380,29 @@ namespace SWPatcher.Forms
                 }
             }
 
-            this.ComboBoxRegions.DataSource = regions.Count > 0 ? regions : null;
+            ComboBoxRegions.DataSource = regions.Count > 0 ? regions : null;
 
-            if (this.ComboBoxRegions.DataSource != null)
+            if (ComboBoxRegions.DataSource != null)
             {
-                if (String.IsNullOrEmpty(UserSettings.RegionId))
+                if (string.IsNullOrEmpty(UserSettings.RegionId))
                 {
-                    if (this.ComboBoxRegions.SelectedItem == null && this.ComboBoxRegions.Items.Count > 0)
+                    if (ComboBoxRegions.SelectedItem == null && ComboBoxRegions.Items.Count > 0)
                     {
-                        this.ComboBoxRegions.SelectedItem = this.ComboBoxRegions.Items[0];
-                        UserSettings.RegionId = (this.ComboBoxRegions.SelectedItem as Region).Id;
+                        ComboBoxRegions.SelectedItem = ComboBoxRegions.Items[0];
+                        UserSettings.RegionId = (ComboBoxRegions.SelectedItem as Region).Id;
                     }
                     else
                     {
-                        UserSettings.RegionId = (this.ComboBoxRegions?.SelectedItem as Region)?.Id ?? "jpc";
+                        UserSettings.RegionId = (ComboBoxRegions?.SelectedItem as Region)?.Id ?? "jpc";
                     }
                 }
                 else
                 {
-                    int index = this.ComboBoxRegions.Items.IndexOf(new Region(UserSettings.RegionId));
-                    this.ComboBoxRegions.SelectedIndex = index == -1 ? 0 : index;
+                    int index = ComboBoxRegions.Items.IndexOf(new Region(UserSettings.RegionId));
+                    ComboBoxRegions.SelectedIndex = index == -1 ? 0 : index;
                 }
 
-                this.ComboBoxRegions_SelectionChangeCommitted(this, EventArgs.Empty);
+                ComboBoxRegions_SelectionChangeCommitted(this, EventArgs.Empty);
             }
         }
 
@@ -471,12 +471,12 @@ namespace SWPatcher.Forms
 
         internal IEnumerable<string> GetTranslationFolders()
         {
-            return this.ComboBoxRegions.Items.Cast<Region>().Select(s => s.Folder);
+            return ComboBoxRegions.Items.Cast<Region>().Select(s => s.Folder);
         }
 
         internal Region GetSelectedRegion()
         {
-            return this.ComboBoxRegions.SelectedItem as Region;
+            return ComboBoxRegions.SelectedItem as Region;
         }
     }
 }

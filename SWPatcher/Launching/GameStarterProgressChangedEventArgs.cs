@@ -27,7 +27,7 @@ namespace SWPatcher.Launching
 
         internal GameStarterProgressChangedEventArgs(State state)
         {
-            this.State = state;
+            State = state;
         }
     }
 }

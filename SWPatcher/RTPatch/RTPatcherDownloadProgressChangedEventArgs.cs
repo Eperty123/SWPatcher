@@ -28,9 +28,9 @@ namespace SWPatcher.RTPatch
 
         internal RTPatcherDownloadProgressChangedEventArgs(string fileName, int progress, long bytesPerSecond)
         {
-            this.FileName = fileName;
-            this.Progress = progress;
-            this.DownloadSpeed = this.FormatDownloadSpeed(bytesPerSecond);
+            FileName = fileName;
+            Progress = progress;
+            DownloadSpeed = FormatDownloadSpeed(bytesPerSecond);
         }
 
         private string FormatDownloadSpeed(long bytesPerSecond)

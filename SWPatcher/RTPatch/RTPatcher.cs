@@ -65,26 +65,26 @@ namespace SWPatcher.RTPatch
 
         internal RTPatcher()
         {
-            this.Worker = new BackgroundWorker()
+            Worker = new BackgroundWorker()
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            this.Worker.DoWork += this.Worker_DoWork;
-            this.Worker.ProgressChanged += this.Worker_ProgressChanged;
-            this.Worker.RunWorkerCompleted += this.Worker_RunWorkerCompleted;
+            Worker.DoWork += Worker_DoWork;
+            Worker.ProgressChanged += Worker_ProgressChanged;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string regionId = this.Language.ApplyingRegionId;
+            string regionId = Language.ApplyingRegionId;
             Methods.CheckRunningGame(regionId);
             switch (regionId)
             {
                 case "jp":
                 case "gjp":
                     LoadVersions();
-                    Logger.Debug(Methods.MethodFullName("RTPatch", Thread.CurrentThread.ManagedThreadId.ToString(), this.ClientNextVersion.ToString()));
+                    Logger.Debug(Methods.MethodFullName("RTPatch", Thread.CurrentThread.ManagedThreadId.ToString(), ClientNextVersion.ToString()));
 
                     break;
 
@@ -110,27 +110,27 @@ namespace SWPatcher.RTPatch
                     throw new Exception(StringLoader.GetText("exception_region_unknown", regionId));
             }
 
-            while (this.ClientNextVersion < this.ServerVersion)
+            while (ClientNextVersion < ServerVersion)
             {
-                if (this.Worker.CancellationPending)
+                if (Worker.CancellationPending)
                 {
                     e.Cancel = true;
                     return;
                 }
 
-                this.FileCount = 0;
-                this.FileNumber = 0;
-                this.FileName = "";
-                this.LastMessage = "";
-                this.ClientVersion = this.ClientNextVersion;
-                this.ClientNextVersion = this.GetNextVersion(this.ClientNextVersion);
-                string RTPFileName = VersionToRTP(this.ClientNextVersion);
-                string url = this.Url + RTPFileName;
+                FileCount = 0;
+                FileNumber = 0;
+                FileName = "";
+                LastMessage = "";
+                ClientVersion = ClientNextVersion;
+                ClientNextVersion = GetNextVersion(ClientNextVersion);
+                string RTPFileName = VersionToRTP(ClientNextVersion);
+                string url = Url + RTPFileName;
                 string destination = Path.Combine(UserSettings.GamePath, RTPFileName);
                 string gamePath = UserSettings.GamePath;
-                string diffFilePath = Path.Combine(gamePath, VersionToRTP(this.ClientNextVersion));
-                this.CurrentLogFilePath = Path.Combine(Strings.FolderName.RTPatchLogs, Path.GetFileName(diffFilePath) + ".log");
-                string logDirectory = Path.GetDirectoryName(this.CurrentLogFilePath);
+                string diffFilePath = Path.Combine(gamePath, VersionToRTP(ClientNextVersion));
+                CurrentLogFilePath = Path.Combine(Strings.FolderName.RTPatchLogs, Path.GetFileName(diffFilePath) + ".log");
+                string logDirectory = Path.GetDirectoryName(CurrentLogFilePath);
                 Directory.CreateDirectory(logDirectory);
 
                 Logger.Info($"Downloading url=[{url}] path=[{destination}]");
@@ -157,12 +157,12 @@ namespace SWPatcher.RTPatch
                             long fileBytes = fileLength;
                             long receivedBytes = 0;
 
-                            this.Worker.ReportProgress(0, 0L);
+                            Worker.ReportProgress(0, 0L);
                             Stopwatch sw = new Stopwatch();
                             sw.Start();
                             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     request.Abort();
@@ -187,7 +187,7 @@ namespace SWPatcher.RTPatch
                                     bytesPerSecond = receivedBytes;
                                 }
 
-                                this.Worker.ReportProgress(progress, bytesPerSecond);
+                                Worker.ReportProgress(progress, bytesPerSecond);
                             }
                             sw.Stop();
                         }
@@ -198,15 +198,15 @@ namespace SWPatcher.RTPatch
 
                 Methods.CheckRunningProcesses(regionId);
                 Logger.Info($"RTPatchApply diffFile=[{diffFilePath}] path=[{gamePath}]");
-                this.Worker.ReportProgress(-1, 0L);
+                Worker.ReportProgress(-1, 0L);
 
                 #region Apply RTPatch
 
-                File.Delete(this.CurrentLogFilePath);
+                File.Delete(CurrentLogFilePath);
                 string command = $"/u /nos \"{gamePath}\" \"{diffFilePath}\"";
-                ulong result = Environment.Is64BitProcess ? NativeMethods.RTPatchApply64(command, new RTPatchCallback(this.RTPatchMessage), true) : NativeMethods.RTPatchApply32(command, new RTPatchCallback(this.RTPatchMessage), true);
+                ulong result = Environment.Is64BitProcess ? NativeMethods.RTPatchApply64(command, new RTPatchCallback(RTPatchMessage), true) : NativeMethods.RTPatchApply32(command, new RTPatchCallback(RTPatchMessage), true);
                 Logger.Debug($"RTPatchApply finished with result=[{result}]");
-                File.AppendAllText(this.CurrentLogFilePath, $"Result=[{result}]");
+                File.AppendAllText(CurrentLogFilePath, $"Result=[{result}]");
 
                 if (result != 0)
                 {
@@ -218,7 +218,7 @@ namespace SWPatcher.RTPatch
                         return; // RTPatch cancelled
                     }
 
-                    throw new ResultException(this.LastMessage, result, this.CurrentLogFilePath, this.FileName, this.ClientVersion);
+                    throw new ResultException(LastMessage, result, CurrentLogFilePath, FileName, ClientVersion);
                 }
                 File.Delete(diffFilePath);
 
@@ -230,7 +230,7 @@ namespace SWPatcher.RTPatch
                 string iniPath = Path.Combine(UserSettings.GamePath, Strings.IniName.ClientVer);
                 ini.Load(iniPath);
                 string serverVer = ini.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value;
-                string clientVer = this.ClientNextVersion.ToString();
+                string clientVer = ClientNextVersion.ToString();
                 if (serverVer != clientVer)
                 {
                     ini.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value = clientVer;
@@ -243,42 +243,42 @@ namespace SWPatcher.RTPatch
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (this.FileCount == 0)
+            if (FileCount == 0)
             {
-                this.RTPatcherDownloadProgressChanged?.Invoke(sender, new RTPatcherDownloadProgressChangedEventArgs(VersionToRTP(this.ClientNextVersion), e.ProgressPercentage, (long)e.UserState));
+                RTPatcherDownloadProgressChanged?.Invoke(sender, new RTPatcherDownloadProgressChangedEventArgs(VersionToRTP(ClientNextVersion), e.ProgressPercentage, (long)e.UserState));
             }
             else
             {
-                this.RTPatcherProgressChanged?.Invoke(this, new RTPatcherProgressChangedEventArgs(this.FileNumber, this.FileCount, this.FileName, e.ProgressPercentage));
+                RTPatcherProgressChanged?.Invoke(this, new RTPatcherProgressChangedEventArgs(FileNumber, FileCount, FileName, e.ProgressPercentage));
             }
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.RTPatcherCompleted?.Invoke(this, new RTPatcherCompletedEventArgs(e.Cancelled, e.Error, this.Language));
+            RTPatcherCompleted?.Invoke(this, new RTPatcherCompletedEventArgs(e.Cancelled, e.Error, Language));
         }
 
         private void LoadVersions()
         {
             IniFile serverIni = Methods.GetJPServerIni();
-            this.ServerVersion = new Version(serverIni.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value);
+            ServerVersion = new Version(serverIni.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value);
             string address = serverIni.Sections[Strings.IniName.ServerRepository.Section].Keys[Strings.IniName.ServerRepository.Key].Value;
-            this.Url = address + Strings.IniName.ServerRepository.UpdateRepository;
+            Url = address + Strings.IniName.ServerRepository.UpdateRepository;
 
             IniFile clientIni = new IniFile();
             clientIni.Load(Path.Combine(UserSettings.GamePath, Strings.IniName.ClientVer));
-            this.ClientNextVersion = new Version(clientIni.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value);
+            ClientNextVersion = new Version(clientIni.Sections[Strings.IniName.Ver.Section].Keys[Strings.IniName.Ver.Key].Value);
         }
 
         private void CheckKRVersion()
         {
             int serverVersion = Methods.GetKRServerVersion();
             //int clientVersion = Convert.ToInt32(Methods.GetRegistryValue(Strings.Registry.KR.RegistryKey, Strings.Registry.KR.Key32Path, Strings.Registry.KR.Version, 0));
-            string stovePath = Methods.GetRegistryValue(Strings.Registry.KR.RegistryKey, Strings.Registry.KR.StoveKeyPath, Strings.Registry.KR.StoveWorkingDir, String.Empty);
+            string stovePath = Methods.GetRegistryValue(Strings.Registry.KR.RegistryKey, Strings.Registry.KR.StoveKeyPath, Strings.Registry.KR.StoveWorkingDir, string.Empty);
             string smilegatePath = Path.GetDirectoryName(stovePath);
             string soulworkerManifestPath = Path.Combine(smilegatePath, @"WebLauncher\gamemanifest\gamemanifest_11_live.upf");
             int clientVersion1 = -1;
-            string soulworkerPath = Methods.GetRegistryValue(Strings.Registry.KR.RegistryKey, Strings.Registry.KR.Key32Path, Strings.Registry.KR.FolderName, String.Empty);
+            string soulworkerPath = Methods.GetRegistryValue(Strings.Registry.KR.RegistryKey, Strings.Registry.KR.Key32Path, Strings.Registry.KR.FolderName, string.Empty);
             string soulworkerManifest2Path = Path.Combine(soulworkerPath, @"combinedata_manifest\gamemanifest_11_live.upf");
             int clientVersion2 = -1;
 
@@ -331,13 +331,13 @@ namespace SWPatcher.RTPatch
             {
                 steamInstallPath = Methods.GetRegistryValue(Strings.Registry.Steam.RegistryKey, Strings.Registry.Steam.Key64Path, Strings.Registry.Steam.InstallPath);
 
-                if (steamInstallPath == String.Empty)
+                if (steamInstallPath == string.Empty)
                 {
                     steamInstallPath = Methods.GetRegistryValue(Strings.Registry.Steam.RegistryKey, Strings.Registry.Steam.Key32Path, Strings.Registry.Steam.InstallPath);
                 }
             }
 
-            if (steamInstallPath != String.Empty)
+            if (steamInstallPath != string.Empty)
             {
                 List<string> libraryPaths = new List<string>();
                 string mainSteamLibrary = Path.Combine(steamInstallPath, "steamapps");
@@ -361,7 +361,7 @@ namespace SWPatcher.RTPatch
                             var smacf = SteamManifest.Load(acf);
                             if (smacf.Elements.TryGetValue("StateFlags", out SteamManifestElement sme))
                             {
-                                if (Int32.TryParse(((SteamManifestEntry)sme).Value, out int stateFlagInt))
+                                if (int.TryParse(((SteamManifestEntry)sme).Value, out int stateFlagInt))
                                 {
                                     var appState = (AppState)stateFlagInt;
                                     if (appState == AppState.StateFullyInstalled)
@@ -382,7 +382,7 @@ namespace SWPatcher.RTPatch
             if (!success)
             {
                 // if no valid soulworker found on steam, look on gameforge's launcher
-                this.CheckGFLauncherVersion();
+                CheckGFLauncherVersion();
             }
         }
 
@@ -400,19 +400,19 @@ namespace SWPatcher.RTPatch
                 gameforgeInstallPath = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Key64Path, Strings.Registry.Gameforge.InstallPath);
                 metadataGameState = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Metadata64Path, Strings.Registry.Gameforge.GameState);
 
-                if (gameforgeInstallPath == String.Empty)
+                if (gameforgeInstallPath == string.Empty)
                 {
                     gameforgeInstallPath = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Key32Path, Strings.Registry.Gameforge.InstallPath);
                     metadataGameState = Methods.GetRegistryValue(Strings.Registry.Gameforge.RegistryKey, Strings.Registry.Gameforge.Metadata32Path, Strings.Registry.Gameforge.GameState);
                 }
             }
 
-            if (gameforgeInstallPath == String.Empty)
+            if (gameforgeInstallPath == string.Empty)
             {
                 throw new Exception(StringLoader.GetText("exception_game_not_latest"));
             }
 
-            if (metadataGameState == String.Empty)
+            if (metadataGameState == string.Empty)
             {
                 throw new Exception(StringLoader.GetText("exception_game_not_latest"));
             }
@@ -465,15 +465,15 @@ namespace SWPatcher.RTPatch
         {
             var result = new Version(clientVer.Major, clientVer.Minor, clientVer.Build, clientVer.Revision + 1);
 
-            if (!WebFileExists(this.Url + VersionToRTP(result)))
+            if (!WebFileExists(Url + VersionToRTP(result)))
             {
                 result = new Version(clientVer.Major, clientVer.Minor, clientVer.Build + 1, 0);
 
-                if (!WebFileExists(this.Url + VersionToRTP(result)))
+                if (!WebFileExists(Url + VersionToRTP(result)))
                 {
                     result = new Version(clientVer.Major, clientVer.Minor + 1, 0, 0);
 
-                    if (!WebFileExists(this.Url + VersionToRTP(result)))
+                    if (!WebFileExists(Url + VersionToRTP(result)))
                     {
                         result = new Version(clientVer.Major + 1, 0, 0, 0);
                     }
@@ -502,8 +502,8 @@ namespace SWPatcher.RTPatch
                 case 11u:
                 case 12u: // outputs
                     string text = Marshal.PtrToStringAnsi(ptr);
-                    this.LastMessage = text;
-                    File.AppendAllText(this.CurrentLogFilePath, text);
+                    LastMessage = text;
+                    File.AppendAllText(CurrentLogFilePath, text);
 
                     break;
 
@@ -515,25 +515,25 @@ namespace SWPatcher.RTPatch
                 case 5u: // completion percentage
                     int readInt = Marshal.ReadInt32(ptr);
                     int percentage = readInt > short.MaxValue ? int.MaxValue : readInt * 0x10000;
-                    this.Worker.ReportProgress(percentage);
+                    Worker.ReportProgress(percentage);
                     percentage = readInt * 100 / 0x8000;
-                    File.AppendAllText(this.CurrentLogFilePath, $"[{percentage}%]");
+                    File.AppendAllText(CurrentLogFilePath, $"[{percentage}%]");
 
                     break;
 
                 case 6u: // number of files in patch
                     int fileCount = Marshal.ReadInt32(ptr);
-                    this.FileCount = fileCount;
-                    File.AppendAllText(this.CurrentLogFilePath, $"File Count=[{fileCount}]\n");
+                    FileCount = fileCount;
+                    File.AppendAllText(CurrentLogFilePath, $"File Count=[{fileCount}]\n");
 
                     break;
 
                 case 7u: // current file
                     string fileName = Marshal.PtrToStringAnsi(ptr);
-                    this.FileNumber++;
-                    this.FileName = fileName;
-                    this.Worker.ReportProgress(-1);
-                    File.AppendAllText(this.CurrentLogFilePath, $"Patching=[{fileName}]\n");
+                    FileNumber++;
+                    FileName = fileName;
+                    Worker.ReportProgress(-1);
+                    File.AppendAllText(CurrentLogFilePath, $"Patching=[{fileName}]\n");
 
                     break;
 
@@ -541,7 +541,7 @@ namespace SWPatcher.RTPatch
                     break; // ignore rest
             }
 
-            if (this.Worker.CancellationPending)
+            if (Worker.CancellationPending)
             {
                 return null;
             }
@@ -551,18 +551,18 @@ namespace SWPatcher.RTPatch
 
         internal void Cancel()
         {
-            this.Worker.CancelAsync();
+            Worker.CancelAsync();
         }
 
         internal void Run(Language language)
         {
-            if (this.Worker.IsBusy)
+            if (Worker.IsBusy)
             {
                 return;
             }
 
-            this.Language = language;
-            this.Worker.RunWorkerAsync();
+            Language = language;
+            Worker.RunWorkerAsync();
         }
     }
 }

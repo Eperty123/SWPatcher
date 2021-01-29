@@ -6,7 +6,7 @@
 
         public SteamManifestEntry(string name, string value) : base(name)
         {
-            this.Value = value;
+            Value = value;
         }
     }
 }

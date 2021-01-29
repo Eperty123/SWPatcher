@@ -40,7 +40,7 @@ namespace SWPatcher.Helpers.GlobalVariables
             }
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     value = value.Replace("\\\\", "\\");
                     Directory.CreateDirectory(value);

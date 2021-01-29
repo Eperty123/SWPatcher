@@ -83,19 +83,19 @@ namespace SWPatcher
         {
             internal SingleInstanceController()
             {
-                this.IsSingleInstance = true;
-                this.StartupNextInstance += new Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventHandler(this.SingleInstanceController_StartupNextInstance);
+                IsSingleInstance = true;
+                StartupNextInstance += new Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventHandler(SingleInstanceController_StartupNextInstance);
             }
 
             private void SingleInstanceController_StartupNextInstance(object sender, Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs e)
             {
-                var mainForm = this.MainForm as Forms.MainForm;
+                var mainForm = MainForm as Forms.MainForm;
                 mainForm.RestoreFromTray();
             }
 
             protected override void OnCreateMainForm()
             {
-                this.MainForm = new Forms.MainForm();
+                MainForm = new Forms.MainForm();
             }
         }
     }

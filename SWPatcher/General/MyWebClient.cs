@@ -34,17 +34,17 @@ namespace SWPatcher.General
         {
             HttpWebRequest request = (HttpWebRequest)base.GetWebRequest(address);
             request.ClientCertificates.Add(new X509Certificate());
-            request.CookieContainer = this._container;
+            request.CookieContainer = _container;
             return request;
         }
 
         protected override WebResponse GetWebResponse(WebRequest request)
         {
             HttpWebResponse response = (HttpWebResponse)base.GetWebResponse(request);
-            if (this.ResponseCookies != null)
-                this.ResponseCookies.Add(response.Cookies);
+            if (ResponseCookies != null)
+                ResponseCookies.Add(response.Cookies);
             else
-                this.ResponseCookies = response.Cookies;
+                ResponseCookies = response.Cookies;
 
             return response;
         }

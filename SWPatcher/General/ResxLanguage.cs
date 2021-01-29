@@ -25,26 +25,26 @@ namespace SWPatcher.General
 
         internal ResxLanguage(string language, string code)
         {
-            this.Language = language;
-            this.Code = code;
+            Language = language;
+            Code = code;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
             ResxLanguage language = obj as ResxLanguage;
-            return this.Language == language.Language;
+            return Language == language.Language;
         }
 
         public override int GetHashCode()
         {
-            return this.Language.GetHashCode();
+            return Language.GetHashCode();
         }
 
         public override string ToString()
         {
-            return this.Language;
+            return Language;
         }
     }
 }

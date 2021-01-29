@@ -27,35 +27,35 @@ namespace SWPatcher.General
 
         internal Region(string id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         internal Region(string id, string name, string folder, Language[] appliedLanguages) : this(id)
         {
-            this.Name = name;
-            this.Folder = folder;
-            this.AppliedLanguages = appliedLanguages;
+            Name = name;
+            Folder = folder;
+            AppliedLanguages = appliedLanguages;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
 
             var region = obj as Region;
-            return this.Id == region.Id;
+            return Id == region.Id;
         }
 
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

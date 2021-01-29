@@ -35,19 +35,19 @@ namespace SWPatcher.Forms
 
         private void InitializeTextComponent()
         {
-            this.ButtonOk.Text = StringLoader.GetText("button_ok");
-            this.Text = $"About {AssemblyAccessor.Title}";
-            this.LabelProductName.Text = AssemblyAccessor.Product;
-            this.LabelVersion.Text = $"Version {AssemblyAccessor.Version}";
-            this.LabelCopyright.Text += "\nFork by Asaduji";
-            this.TextBoxDescription.Text = StringLoader.GetText("patcher_description");
-            this.LinkLabelWebsite.Links.Add(0, this.LinkLabelWebsite.Text.Length, Urls.SoulworkerWebsite);
-            this.LogoPictureBox.ImageLocation = $"https://raw.githubusercontent.com/Miyuyami/SWPatcher/master/Images/{(new Random()).Next(ImagesCount) + 1}.png";
+            ButtonOk.Text = StringLoader.GetText("button_ok");
+            Text = $"About {AssemblyAccessor.Title}";
+            LabelProductName.Text = AssemblyAccessor.Product;
+            LabelVersion.Text = $"Version {AssemblyAccessor.Version}";
+            LabelCopyright.Text += "\nFork by Asaduji && Eperty123";
+            TextBoxDescription.Text = StringLoader.GetText("patcher_description");
+            LinkLabelWebsite.Links.Add(0, LinkLabelWebsite.Text.Length, Urls.SoulworkerWebsite);
+            LogoPictureBox.ImageLocation = $"https://raw.githubusercontent.com/Miyuyami/SWPatcher/master/Images/{(new Random()).Next(ImagesCount) + 1}.png";
         }
 
         private void LinkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.LinkLabelWebsite.LinkVisited = true;
+            LinkLabelWebsite.LinkVisited = true;
             System.Diagnostics.Process.Start(Urls.SoulworkerWebsite);
         }
 
@@ -63,9 +63,9 @@ namespace SWPatcher.Forms
         {
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void forkLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.linkLabel1.LinkVisited = true;
+            forkLinkLabel.LinkVisited = true;
             System.Diagnostics.Process.Start(Urls.ForkWebsite);
         }
     }

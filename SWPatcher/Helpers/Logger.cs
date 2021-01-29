@@ -97,8 +97,8 @@ namespace SWPatcher.Helpers
                 messages[i] = messages[i].PadLeft(messages[i].Length + 9, '\t');
             }
 
-            message = String.Join("\n", messages);
-            string logEntry = String.Format(_logFormat, dateTime.ToString(_dateFormat), logMode, message);
+            message = string.Join("\n", messages);
+            string logEntry = string.Format(_logFormat, dateTime.ToString(_dateFormat), logMode, message);
 #if DEBUG && !ENCRYPT_LOG
             File.AppendAllText(Strings.FileName.Log, logEntry);
 #else

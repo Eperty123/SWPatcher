@@ -28,8 +28,8 @@ namespace SWPatcher.Patching
 
         internal PatcherProgressChangedEventArgs(State patcherState, int progress)
         {
-            this.PatcherState = patcherState;
-            this.Progress = progress;
+            PatcherState = patcherState;
+            Progress = progress;
         }
     }
 }

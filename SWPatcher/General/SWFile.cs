@@ -26,9 +26,9 @@ namespace SWPatcher.General
 
         internal SWFile(string name, string path, string pathD)
         {
-            this.Name = name;
-            this.Path = path;
-            this.PathD = pathD;
+            Name = name;
+            Path = path;
+            PathD = pathD;
         }
     }
 }

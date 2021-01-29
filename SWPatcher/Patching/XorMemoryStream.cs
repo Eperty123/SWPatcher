@@ -31,7 +31,7 @@ namespace SWPatcher.Patching
 
         internal XorMemoryStream(int capacity, byte xorByte) : base(capacity)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorMemoryStream(byte[] buffer, byte xorByte) : this(buffer, true, xorByte)
@@ -41,7 +41,7 @@ namespace SWPatcher.Patching
 
         internal XorMemoryStream(byte[] buffer, bool writable, byte xorByte) : base(buffer, writable)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorMemoryStream(byte[] buffer, int index, int count, byte xorByte) : this(buffer, index, count, true, false, xorByte)
@@ -56,7 +56,7 @@ namespace SWPatcher.Patching
 
         internal XorMemoryStream(byte[] buffer, int index, int count, bool writable, bool publiclyVisible, byte xorByte) : base(buffer, index, count, writable, publiclyVisible)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -69,7 +69,7 @@ namespace SWPatcher.Patching
 
         public override int ReadByte()
         {
-            return base.ReadByte() ^ this.XorByte;
+            return base.ReadByte() ^ XorByte;
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -80,7 +80,7 @@ namespace SWPatcher.Patching
 
         public override void WriteByte(byte value)
         {
-            value ^= this.XorByte;
+            value ^= XorByte;
             base.WriteByte(value);
         }
 
@@ -89,7 +89,7 @@ namespace SWPatcher.Patching
             int length = offset + count;
             for (int i = offset; i < length; i++)
             {
-                buffer[i] ^= this.XorByte;
+                buffer[i] ^= XorByte;
             }
         }
     }

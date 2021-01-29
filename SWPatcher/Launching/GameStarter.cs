@@ -48,14 +48,14 @@ namespace SWPatcher.Launching
 
         internal GameStarter()
         {
-            this.Worker = new BackgroundWorker
+            Worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            this.Worker.DoWork += this.Worker_DoWork;
-            this.Worker.ProgressChanged += this.Worker_ProgressChanged;
-            this.Worker.RunWorkerCompleted += this.Worker_RunWorkerCompleted;
+            Worker.DoWork += Worker_DoWork;
+            Worker.ProgressChanged += Worker_ProgressChanged;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
         }
 
         internal event GameStarterProgressChangedEventHandler GameStarterProgressChanged;
@@ -64,15 +64,15 @@ namespace SWPatcher.Launching
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.Worker.ReportProgress((int)State.Prepare);
+            Worker.ReportProgress((int)State.Prepare);
 
-            if (this.PlaceTranslations)
+            if (PlaceTranslations)
             {
-                Logger.Debug(Methods.MethodFullName("GameStart", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ApplyingRegionId, this.Language.ToString()));
+                Logger.Debug(Methods.MethodFullName("GameStart", Thread.CurrentThread.ManagedThreadId.ToString(), Language.ApplyingRegionId, Language.ToString()));
 
-                SWFileManager.LoadFileConfiguration(this.Language);
+                SWFileManager.LoadFileConfiguration(Language);
 
-                if (IsTranslationOutdatedOrMissing(this.Language))
+                if (IsTranslationOutdatedOrMissing(Language))
                 {
                     e.Result = true; // call force patch in completed event
                     return;
@@ -80,11 +80,11 @@ namespace SWPatcher.Launching
 
                 if (UserSettings.WantToPatchExe)
                 {
-                    string regionId = this.Language.ApplyingRegionId == "jpc" ? "jp" : this.Language.ApplyingRegionId;
-                    string regionFolder = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
+                    string regionId = Language.ApplyingRegionId == "jpc" ? "jp" : Language.ApplyingRegionId;
+                    string regionFolder = Language.ApplyingRegionFolder == "jpc" ? "jp" : Language.ApplyingRegionFolder;
                     string gameExePath = Path.Combine(UserSettings.GamePath, Methods.GetGameExeName(regionId));
                     string gameExePatchedPath = Path.Combine(UserSettings.PatcherPath, regionId, Methods.GetGameExeName(regionId));
-                    string backupFilePath = Path.Combine(this.Language.BackupPath, Methods.GetGameExeName(regionId));
+                    string backupFilePath = Path.Combine(Language.BackupPath, Methods.GetGameExeName(regionId));
 
                     if (!File.Exists(gameExePatchedPath))
                     {
@@ -99,16 +99,16 @@ namespace SWPatcher.Launching
                 Process clientProcess = null;
                 if (UserSettings.WantToLogin)
                 {
-                    string regionId = this.Language.ApplyingRegionId;
+                    string regionId = Language.ApplyingRegionId;
                     switch (regionId)
                     {
                         case "jp":
-                            StartHangeJP(() => BackupAndPlaceFiles(this.Language));
+                            StartHangeJP(() => BackupAndPlaceFiles(Language));
 
-                            this.Worker.ReportProgress((int)State.WaitClient);
+                            Worker.ReportProgress((int)State.WaitClient);
                             while (true)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     return;
@@ -129,12 +129,12 @@ namespace SWPatcher.Launching
                             break;
 
                         case "gjp":
-                            StartGamecomJP(() => BackupAndPlaceFiles(this.Language));
+                            StartGamecomJP(() => BackupAndPlaceFiles(Language));
 
-                            this.Worker.ReportProgress((int)State.WaitClient);
+                            Worker.ReportProgress((int)State.WaitClient);
                             while (true)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     return;
@@ -155,12 +155,12 @@ namespace SWPatcher.Launching
                             break;
 
                         case "kr":
-                            StartStoveKR(() => BackupAndPlaceFiles(this.Language));
+                            StartStoveKR(() => BackupAndPlaceFiles(Language));
 
-                            this.Worker.ReportProgress((int)State.WaitClient);
+                            Worker.ReportProgress((int)State.WaitClient);
                             while (true)
                             {
-                                if (this.Worker.CancellationPending)
+                                if (Worker.CancellationPending)
                                 {
                                     e.Cancel = true;
                                     return;
@@ -197,23 +197,23 @@ namespace SWPatcher.Launching
                 }
                 else if (Language.ApplyingRegionId == "jpc")
                 {
-                    BackupAndPlaceFiles(this.Language);
+                    BackupAndPlaceFiles(Language);
                     clientProcess = StartCustomGame();
                 }
                 else
                 {
-                    BackupAndPlaceFiles(this.Language);
+                    BackupAndPlaceFiles(Language);
 
-                    this.Worker.ReportProgress((int)State.WaitClient);
+                    Worker.ReportProgress((int)State.WaitClient);
                     while (true)
                     {
-                        if (this.Worker.CancellationPending)
+                        if (Worker.CancellationPending)
                         {
                             e.Cancel = true;
                             return;
                         }
 
-                        clientProcess = GetProcess(Methods.GetGameExeName(this.Language.ApplyingRegionId));
+                        clientProcess = GetProcess(Methods.GetGameExeName(Language.ApplyingRegionId));
 
                         if (clientProcess == null)
                         {
@@ -226,16 +226,16 @@ namespace SWPatcher.Launching
                     }
                 }
 
-                this.Worker.ReportProgress((int)State.WaitClose);
+                Worker.ReportProgress((int)State.WaitClose);
                 clientProcess.WaitForExit();
             }
             else
             {
-                Logger.Debug(Methods.MethodFullName("GameStart", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ApplyingRegionId));
+                Logger.Debug(Methods.MethodFullName("GameStart", Thread.CurrentThread.ManagedThreadId.ToString(), Language.ApplyingRegionId));
 
                 if (UserSettings.WantToLogin)
                 {
-                    string regionId = this.Language.ApplyingRegionId;
+                    string regionId = Language.ApplyingRegionId;
                     switch (regionId)
                     {
                         case "jp":
@@ -285,18 +285,18 @@ namespace SWPatcher.Launching
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.GameStarterProgressChanged?.Invoke(sender, new GameStarterProgressChangedEventArgs((State)e.ProgressPercentage));
+            GameStarterProgressChanged?.Invoke(sender, new GameStarterProgressChangedEventArgs((State)e.ProgressPercentage));
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled || e.Error != null)
             {
-                this.GameStarterCompleted?.Invoke(sender, new GameStarterCompletedEventArgs(e.Cancelled, e.Error, this.Language));
+                GameStarterCompleted?.Invoke(sender, new GameStarterCompletedEventArgs(e.Cancelled, e.Error, Language));
             }
             else
             {
-                this.GameStarterCompleted?.Invoke(sender, new GameStarterCompletedEventArgs(e.Cancelled, e.Error, this.Language, e.Result == null ? false : (bool)e.Result));
+                GameStarterCompleted?.Invoke(sender, new GameStarterCompletedEventArgs(e.Cancelled, e.Error, Language, e.Result == null ? false : (bool)e.Result));
             }
         }
 
@@ -357,7 +357,7 @@ namespace SWPatcher.Launching
             string id = UserSettings.GameId;
             string pw = UserSettings.GamePw;
 
-            if (String.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 throw new Exception(StringLoader.GetText("exception_empty_id"));
             }
@@ -370,7 +370,7 @@ namespace SWPatcher.Launching
             };
             using (System.Security.SecureString secure = Methods.DecryptString(pw))
             {
-                if (String.IsNullOrEmpty(values[Strings.Web.JP.Hange.PostPw] = Methods.ToInsecureString(secure)))
+                if (string.IsNullOrEmpty(values[Strings.Web.JP.Hange.PostPw] = Methods.ToInsecureString(secure)))
                 {
                     throw new Exception(StringLoader.GetText("exception_empty_pw"));
                 }
@@ -406,7 +406,7 @@ namespace SWPatcher.Launching
             string id = UserSettings.GameId;
             string pw = UserSettings.GamePw;
 
-            if (String.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 throw new Exception(StringLoader.GetText("exception_empty_id"));
             }
@@ -417,7 +417,7 @@ namespace SWPatcher.Launching
             };
             using (System.Security.SecureString secure = Methods.DecryptString(pw))
             {
-                if (String.IsNullOrEmpty(values[Strings.Web.JP.Gamecom.PostPw] = Methods.ToInsecureString(secure)))
+                if (string.IsNullOrEmpty(values[Strings.Web.JP.Gamecom.PostPw] = Methods.ToInsecureString(secure)))
                 {
                     throw new Exception(StringLoader.GetText("exception_empty_pw"));
                 }
@@ -436,7 +436,7 @@ namespace SWPatcher.Launching
             string id = UserSettings.GameId;
             string pw = UserSettings.GamePw;
 
-            if (String.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 throw new Exception(StringLoader.GetText("exception_empty_id"));
             }
@@ -447,7 +447,7 @@ namespace SWPatcher.Launching
             };
             using (System.Security.SecureString secure = Methods.DecryptString(pw))
             {
-                if (String.IsNullOrEmpty(values[Strings.Web.KR.PostPw] = Methods.ToInsecureString(secure)))
+                if (string.IsNullOrEmpty(values[Strings.Web.KR.PostPw] = Methods.ToInsecureString(secure)))
                 {
                     throw new Exception(StringLoader.GetText("exception_empty_pw"));
                 }
@@ -562,7 +562,7 @@ namespace SWPatcher.Launching
         private static string GetKRGameStartProtocol(MyWebClient client)
         {
             string response = Encoding.UTF8.GetString(client.UploadData(Urls.SoulworkerKRGameStart, new byte[] { }));
-            var gameStartJSON = new { code = Int32.MaxValue, message = "", memberNo = Int64.MaxValue, gameAuthToken = "", maintenenceType = "", endTime = "", maintenenceTime = "" };
+            var gameStartJSON = new { code = int.MaxValue, message = "", memberNo = long.MaxValue, gameAuthToken = "", maintenenceType = "", endTime = "", maintenenceTime = "" };
             var jsonResponse = JsonConvert.DeserializeAnonymousType(response, gameStartJSON);
 
             switch (jsonResponse.code)
@@ -677,19 +677,19 @@ namespace SWPatcher.Launching
 
         internal void Cancel()
         {
-            this.Worker.CancelAsync();
+            Worker.CancelAsync();
         }
 
         internal void Run(Language language, bool placeTranslations)
         {
-            if (this.Worker.IsBusy)
+            if (Worker.IsBusy)
             {
                 return;
             }
 
-            this.PlaceTranslations = placeTranslations;
-            this.Language = language;
-            this.Worker.RunWorkerAsync();
+            PlaceTranslations = placeTranslations;
+            Language = language;
+            Worker.RunWorkerAsync();
         }
     }
 }

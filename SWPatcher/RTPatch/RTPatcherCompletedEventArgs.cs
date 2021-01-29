@@ -29,9 +29,9 @@ namespace SWPatcher.RTPatch
 
         internal RTPatcherCompletedEventArgs(bool cancelled, Exception error, Language language)
         {
-            this.Cancelled = cancelled;
-            this.Error = error;
-            this.Language = language;
+            Cancelled = cancelled;
+            Error = error;
+            Language = language;
         }
     }
 }

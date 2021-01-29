@@ -25,7 +25,7 @@ namespace SWPatcher.General
 
         internal ArchivedSWFile(string name, string path, string pathD, string pathA) : base(name, path, pathD)
         {
-            this.PathA = pathA;
+            PathA = pathA;
         }
     }
 }

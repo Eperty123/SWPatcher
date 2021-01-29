@@ -29,16 +29,16 @@ namespace SWPatcher.Downloading
 
         internal DownloaderCompletedEventArgs(bool cancelled, Exception error)
         {
-            this.Language = null;
-            this.Cancelled = cancelled;
-            this.Error = error;
+            Language = null;
+            Cancelled = cancelled;
+            Error = error;
         }
 
         internal DownloaderCompletedEventArgs(Language language, bool cancelled, Exception error)
         {
-            this.Language = language;
-            this.Cancelled = cancelled;
-            this.Error = error;
+            Language = language;
+            Cancelled = cancelled;
+            Error = error;
         }
     }
 }

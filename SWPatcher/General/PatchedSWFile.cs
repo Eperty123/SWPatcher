@@ -24,7 +24,7 @@ namespace SWPatcher.General
 
         internal PatchedSWFile(string name, string path, string pathD, string pathA, string format) : base(name, path, pathD, pathA)
         {
-            this.Format = format;
+            Format = format;
         }
     }
 }

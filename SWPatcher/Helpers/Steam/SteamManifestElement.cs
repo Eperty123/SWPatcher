@@ -6,7 +6,7 @@
 
         public SteamManifestElement(string name)
         {
-            this.Name = name;
+            Name = name;
         }
     }
 }

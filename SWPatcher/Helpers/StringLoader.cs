@@ -30,7 +30,7 @@ namespace SWPatcher.Helpers
         }
         internal static string GetText(string name, params object[] args)
         {
-            return String.Format(GetText(name, UserSettings.UILanguageCode), args);
+            return string.Format(GetText(name, UserSettings.UILanguageCode), args);
         }
 
         private static string GetText(string name, string languageCode)

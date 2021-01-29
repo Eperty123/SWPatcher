@@ -179,7 +179,7 @@ namespace SWPatcher.Helpers
 
         internal static bool IsValidSwPatcherPath(string path)
         {
-            return String.IsNullOrEmpty(path) || !IsSwPath(path) && IsValidSwPatcherPath(Path.GetDirectoryName(path));
+            return string.IsNullOrEmpty(path) || !IsSwPath(path) && IsValidSwPatcherPath(Path.GetDirectoryName(path));
         }
 
         internal static bool IsValidSwPath(string path)
@@ -228,7 +228,7 @@ namespace SWPatcher.Helpers
         {
             using (var client = new WebClient())
             {
-                var apiJSON = new { message = "", result = "", value = new { pid = "", service_code = Int32.MaxValue, live_version = Int32.MinValue, live_project_url = "" } };
+                var apiJSON = new { message = "", result = "", value = new { pid = "", service_code = int.MaxValue, live_version = int.MinValue, live_project_url = "" } };
 
                 var values = new NameValueCollection(2)
                 {
@@ -258,7 +258,7 @@ namespace SWPatcher.Helpers
             using (var client = new WebClient())
             {
                 string hexResult = BitConverter.ToString(exeFileBytes).Replace("-", "");
-                string patchedHexResult = String.Copy(hexResult);
+                string patchedHexResult = string.Copy(hexResult);
 
                 byte[] fileBytes = client.DownloadData(patchInstructionFilePath);
                 var ini = new IniFile();
@@ -499,7 +499,7 @@ namespace SWPatcher.Helpers
 
         internal static string ToInsecureString(SecureString input)
         {
-            string returnValue = String.Empty;
+            string returnValue = string.Empty;
             IntPtr ptr = Marshal.SecureStringToBSTR(input);
             try
             {
@@ -520,7 +520,7 @@ namespace SWPatcher.Helpers
 
         internal static string MethodParams(params string[] args)
         {
-            return $"{(String.Join(", ", args))}";
+            return $"{(string.Join(", ", args))}";
         }
 
         internal static string MethodFullName(MethodBase method, params string[] args)
@@ -539,7 +539,7 @@ namespace SWPatcher.Helpers
 
             if (processes.Length > 0)
             {
-                throw new Exception(StringLoader.GetText("exception_game_already_open", String.Join("/", processes)));
+                throw new Exception(StringLoader.GetText("exception_game_already_open", string.Join("/", processes)));
             }
         }
 
@@ -549,7 +549,7 @@ namespace SWPatcher.Helpers
 
             if (processes.Length > 0)
             {
-                throw new Exception(StringLoader.GetText("exception_game_already_open", String.Join("/", processes)));
+                throw new Exception(StringLoader.GetText("exception_game_already_open", string.Join("/", processes)));
             }
         }
 
@@ -559,7 +559,7 @@ namespace SWPatcher.Helpers
 
             if (processes.Length > 0)
             {
-                throw new Exception(StringLoader.GetText("exception_game_already_open", String.Join("/", processes)));
+                throw new Exception(StringLoader.GetText("exception_game_already_open", string.Join("/", processes)));
             }
         }
 
@@ -683,7 +683,7 @@ namespace SWPatcher.Helpers
 
         internal static string GetRegistryValue(RegistryKey regKey, string path, string varName)
         {
-            return GetRegistryValue(regKey, path, varName, String.Empty);
+            return GetRegistryValue(regKey, path, varName, string.Empty);
         }
 
         internal static string GetRegistryValue(RegistryKey regKey, string path, string varName, object defaultValue)

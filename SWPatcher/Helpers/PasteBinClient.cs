@@ -54,16 +54,16 @@ namespace SWPatcher.Helpers
 
         internal PasteBinClient(string apiDevKey)
         {
-            if (String.IsNullOrEmpty(apiDevKey))
+            if (string.IsNullOrEmpty(apiDevKey))
                 throw new ArgumentNullException("apiDevKey");
-            this.ApiDevKey = apiDevKey;
+            ApiDevKey = apiDevKey;
         }
 
         internal void Login(string userName, string password)
         {
-            if (String.IsNullOrEmpty(userName))
+            if (string.IsNullOrEmpty(userName))
                 throw new ArgumentNullException("userName");
-            if (String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException("password");
 
             NameValueCollection parameters = GetBaseParameters();
@@ -77,21 +77,21 @@ namespace SWPatcher.Helpers
             if (resp.StartsWith("Bad API request"))
                 throw new PasteBinApiException(resp);
 
-            this.UserName = userName;
-            this.ApiUserKey = resp;
+            UserName = userName;
+            ApiUserKey = resp;
         }
 
         internal void Logout()
         {
-            this.UserName = null;
-            this.ApiUserKey = null;
+            UserName = null;
+            ApiUserKey = null;
         }
 
         internal string Paste(PasteBinEntry entry)
         {
             if (entry == null)
                 throw new ArgumentNullException("entry");
-            if (String.IsNullOrEmpty(entry.Text))
+            if (string.IsNullOrEmpty(entry.Text))
                 throw new ArgumentException("The paste text must be set", "entry");
 
             NameValueCollection parameters = GetBaseParameters();
@@ -101,7 +101,7 @@ namespace SWPatcher.Helpers
             SetIfNotEmpty(parameters, ApiParameters.PasteFormat, entry.Format);
             SetIfNotEmpty(parameters, ApiParameters.PastePrivate, entry.Private ? "2" : "1");
             SetIfNotEmpty(parameters, ApiParameters.PasteExpireDate, FormatExpireDate(entry.Expiration));
-            SetIfNotEmpty(parameters, ApiParameters.UserKey, this.ApiUserKey);
+            SetIfNotEmpty(parameters, ApiParameters.UserKey, ApiUserKey);
 
             byte[] bytes;
             using (var client = new WebClient())
@@ -136,7 +136,7 @@ namespace SWPatcher.Helpers
 
         private static void SetIfNotEmpty(NameValueCollection parameters, string name, string value)
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 parameters[name] = value;
             }
@@ -146,7 +146,7 @@ namespace SWPatcher.Helpers
         {
             var parameters = new NameValueCollection
             {
-                [ApiParameters.DevKey] = this.ApiDevKey
+                [ApiParameters.DevKey] = ApiDevKey
             };
             return parameters;
         }

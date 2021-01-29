@@ -29,42 +29,42 @@ namespace SWPatcher.Patching
 
         internal XorFileStream(string path, FileMode mode, byte xorByte) : base(path, mode)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileAccess access, byte xorByte) : base(path, mode, access)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileAccess access, FileShare share, byte xorByte) : base(path, mode, access, share)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, byte xorByte) : base(path, mode, access, share, bufferSize)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, byte xorByte) : base(path, mode, access, share, bufferSize, options)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, bool useAsync, byte xorByte) : base(path, mode, access, share, bufferSize, useAsync)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, byte xorByte) : base(path, mode, rights, share, bufferSize, options)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         internal XorFileStream(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, FileSecurity fileSecurity, byte xorByte) : base(path, mode, rights, share, bufferSize, options, fileSecurity)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         [Obsolete("This constructor has been deprecated. Please use new XorFileStream(SafeFileHandle handle, FileAccess access, byte xorByte) instead.  http://go.microsoft.com/fwlink/?linkid=14202")]
@@ -97,7 +97,7 @@ namespace SWPatcher.Patching
 
         internal XorFileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync, byte xorByte) : base(handle, access, bufferSize, isAsync)
         {
-            this.XorByte = xorByte;
+            XorByte = xorByte;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -110,7 +110,7 @@ namespace SWPatcher.Patching
 
         public override int ReadByte()
         {
-            return base.ReadByte() ^ this.XorByte;
+            return base.ReadByte() ^ XorByte;
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -121,7 +121,7 @@ namespace SWPatcher.Patching
 
         public override void WriteByte(byte value)
         {
-            value ^= this.XorByte;
+            value ^= XorByte;
             base.WriteByte(value);
         }
 
@@ -130,7 +130,7 @@ namespace SWPatcher.Patching
             int length = offset + count;
             for (int i = offset; i < length; i++)
             {
-                buffer[i] ^= this.XorByte;
+                buffer[i] ^= XorByte;
             }
         }
     }

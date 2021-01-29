@@ -37,27 +37,27 @@ namespace SWPatcher.RTPatch
 
         internal ResultException(string message, ulong result, string logPath, string fileName, Version version) : base(message)
         {
-            this.Result = result;
-            this.LogPath = logPath;
-            this.FileName = fileName;
-            this.ClientVersion = version;
+            Result = result;
+            LogPath = logPath;
+            FileName = fileName;
+            ClientVersion = version;
         }
 
         internal ResultException(string message, ulong result, string logPath, string fileName, Version version, Exception innerException) : base(message, innerException)
         {
-            this.Result = result;
-            this.LogPath = logPath;
-            this.FileName = fileName;
-            this.ClientVersion = version;
+            Result = result;
+            LogPath = logPath;
+            FileName = fileName;
+            ClientVersion = version;
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         protected ResultException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            this.Result = info.GetUInt64("Result");
-            this.LogPath = info.GetString("LogPath");
-            this.FileName = info.GetString("FileName");
-            this.ClientVersion = (Version)info.GetValue("ClientVersion", typeof(Version));
+            Result = info.GetUInt64("Result");
+            LogPath = info.GetString("LogPath");
+            FileName = info.GetString("FileName");
+            ClientVersion = (Version)info.GetValue("ClientVersion", typeof(Version));
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
@@ -68,10 +68,10 @@ namespace SWPatcher.RTPatch
                 throw new ArgumentNullException("info");
             }
 
-            info.AddValue("Result", this.Result, typeof(ulong));
-            info.AddValue("LogPath", this.LogPath, typeof(string));
-            info.AddValue("FileName", this.FileName, typeof(string));
-            info.AddValue("ClientVersion", this.ClientVersion, typeof(Version));
+            info.AddValue("Result", Result, typeof(ulong));
+            info.AddValue("LogPath", LogPath, typeof(string));
+            info.AddValue("FileName", FileName, typeof(string));
+            info.AddValue("ClientVersion", ClientVersion, typeof(Version));
 
             base.GetObjectData(info, context);
         }

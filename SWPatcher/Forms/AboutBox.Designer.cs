@@ -53,7 +53,7 @@ namespace SWPatcher.Forms
             this.TextBoxDescription = new System.Windows.Forms.TextBox();
             this.ButtonOk = new System.Windows.Forms.Button();
             this.LinkLabelWebsite = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.forkLinkLabel = new System.Windows.Forms.LinkLabel();
             this.TableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +70,7 @@ namespace SWPatcher.Forms
             this.TableLayoutPanel.Controls.Add(this.TextBoxDescription, 1, 6);
             this.TableLayoutPanel.Controls.Add(this.ButtonOk, 1, 7);
             this.TableLayoutPanel.Controls.Add(this.LinkLabelWebsite, 1, 5);
-            this.TableLayoutPanel.Controls.Add(this.linkLabel1, 1, 4);
+            this.TableLayoutPanel.Controls.Add(this.forkLinkLabel, 1, 4);
             this.TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.TableLayoutPanel.Name = "TableLayoutPanel";
@@ -172,20 +172,20 @@ namespace SWPatcher.Forms
             this.LinkLabelWebsite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LinkLabelWebsite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelWebsite_LinkClicked);
             // 
-            // linkLabel1
+            // forkLinkLabel
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
-            this.linkLabel1.Location = new System.Drawing.Point(149, 112);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.linkLabel1.MaximumSize = new System.Drawing.Size(0, 17);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(56, 17);
-            this.linkLabel1.TabIndex = 26;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Fork Page";
-            this.linkLabel1.UseCompatibleTextRendering = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.forkLinkLabel.AutoSize = true;
+            this.forkLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
+            this.forkLinkLabel.Location = new System.Drawing.Point(149, 112);
+            this.forkLinkLabel.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.forkLinkLabel.MaximumSize = new System.Drawing.Size(0, 17);
+            this.forkLinkLabel.Name = "forkLinkLabel";
+            this.forkLinkLabel.Size = new System.Drawing.Size(56, 17);
+            this.forkLinkLabel.TabIndex = 26;
+            this.forkLinkLabel.TabStop = true;
+            this.forkLinkLabel.Text = "Fork Page";
+            this.forkLinkLabel.UseCompatibleTextRendering = true;
+            this.forkLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forkLinkLabel_LinkClicked);
             // 
             // AboutBox
             // 
@@ -218,6 +218,6 @@ namespace SWPatcher.Forms
         private System.Windows.Forms.TextBox TextBoxDescription;
         private System.Windows.Forms.Button ButtonOk;
         private System.Windows.Forms.LinkLabel LinkLabelWebsite;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel forkLinkLabel;
     }
 }
