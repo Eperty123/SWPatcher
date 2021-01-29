@@ -16,17 +16,20 @@
  * along with Soulworker Patcher. If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
+
 namespace SWPatcher.Helpers.GlobalVariables
 {
     internal sealed class Urls
     {
         internal const string SoulworkerWebsite = "https://miyuyami.github.io/patcher.html";
-        internal const string ForkWebsite = "https://github.com/Eperty123/SWPatcher";
+        internal const string ForkWebsite = "https://github.com/Asaduji/SWPatcher";
+        internal const string ForkGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/";
         /*
 #if DEBUG
 
         //internal static string TranslationGitHubHome = System.Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\SWPatcher\");
-        //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Eperty123/SWPatcher/master/SWPatcher/Translations/";
+        //internal const string TranslationGitHubHome = "https://raw.githubusercontent.com/Asaduji/SWPatcher/master/SWPatcher/Translations/";
         internal static string TranslationGitHubHome = "https://raw.githubusercontent.com/Miyuyami/SoulWorkerHQTranslations/master/";
 
 #else
@@ -49,11 +52,7 @@ namespace SWPatcher.Helpers.GlobalVariables
             }
             set
             {
-                CurrentTranslationPath = value;
-                if (!CurrentTranslationPath.EndsWith("/") && !CurrentTranslationPath.EndsWith("\\"))
-                {
-                    CurrentTranslationPath += "/";
-                }
+                CurrentTranslationPath = new UriBuilder(value).Uri.ToString() + "/";
             }
         }
 

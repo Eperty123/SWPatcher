@@ -95,7 +95,18 @@ namespace SWPatcher.Patching
             this.CurrentState = State.Load;
             IEnumerable<ArchivedSWFile> archivedSWFiles = SWFileManager.GetFiles().OfType<ArchivedSWFile>();
             string regionFldr = this.Language.ApplyingRegionFolder == "jpc" ? "jp" : this.Language.ApplyingRegionFolder;
-            string datasArchivesPath = Urls.TranslationGitHubHome + regionFldr + '/' + Strings.IniName.DatasArchives;
+            string datasArchivesPath;
+
+            //Looks like data12 password changed, i'll change this later to something less dirty
+            if (this.Language.ApplyingRegionFolder != "jpc" || UserSettings.UseCustomTranslationServer)
+            {
+                datasArchivesPath = Urls.TranslationGitHubHome + regionFldr + '/' + Strings.IniName.DatasArchives;
+            }
+            else
+            {
+                datasArchivesPath = Urls.ForkGitHubHome + Strings.IniName.DatasArchives;
+            }
+
             Logger.Debug(Methods.MethodFullName(System.Reflection.MethodBase.GetCurrentMethod(), datasArchivesPath));
             Dictionary<string, string> passwordDictionary = LoadPasswords(datasArchivesPath);
             int archivedSWFilesCount = archivedSWFiles.Count();

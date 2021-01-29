@@ -24,7 +24,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace SWPatcher.Downloading
 {
@@ -59,15 +58,14 @@ namespace SWPatcher.Downloading
         {
             Logger.Debug(Methods.MethodFullName("Downloader", Thread.CurrentThread.ManagedThreadId.ToString(), this.Language.ToString()));
 
-            SWFileManager.LoadFileConfiguration(this.Language);
-            //if (Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
-            //{
-            //    SWFileManager.LoadFileConfiguration(this.Language);
-            //}
-            //else
-            //{
-            //    throw new Exception(StringLoader.GetText("exception_already_latest_translation", Methods.DateToLocalString(this.Language.LastUpdate)));
-            //}
+            if (UserSettings.BypassTranslationDateCheck || Methods.HasNewTranslations(this.Language) || Methods.IsTranslationOutdated(this.Language))
+            {
+                SWFileManager.LoadFileConfiguration(this.Language);
+            }
+            else
+            {
+                throw new Exception(StringLoader.GetText("exception_already_latest_translation", Methods.DateToLocalString(this.Language.LastUpdate)));
+            }
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
